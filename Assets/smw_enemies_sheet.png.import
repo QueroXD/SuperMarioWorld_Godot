@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/tiles-2-removebg-preview.png-6bb1651131c6f1cd081b761f952997f2.stex"
+path="res://.import/smw_enemies_sheet.png-23d2d861e5cbd5b4c7f2ffee804dc625.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/tiles-2-removebg-preview.png"
-dest_files=[ "res://.import/tiles-2-removebg-preview.png-6bb1651131c6f1cd081b761f952997f2.stex" ]
+source_file="res://Assets/smw_enemies_sheet.png"
+dest_files=[ "res://.import/smw_enemies_sheet.png-23d2d861e5cbd5b4c7f2ffee804dc625.stex" ]
 
 [params]
 
