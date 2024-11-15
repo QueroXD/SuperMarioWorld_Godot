@@ -1,10 +1,8 @@
-[gd_scene load_steps=31 format=3 uid="uid://dvx604vyrddcc"]
+[gd_scene load_steps=31 format=3 uid="uid://c4l7hxaahtxdf"]
 
 [ext_resource type="Texture2D" uid="uid://brlrwo02orld3" path="res://Assets/Mario Animacion.png" id="1_7n7hb"]
 [ext_resource type="Texture2D" uid="uid://grduarhke2te" path="res://Assets/Mario AnimacionLadoOpuesto.png" id="2_lyvn8"]
 [ext_resource type="Texture2D" uid="uid://c5l2mau07q1u7" path="res://Assets/mario.png" id="2_mxvoc"]
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_7jcr5"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_e5ax0"]
 atlas = ExtResource("1_7n7hb")
@@ -234,13 +232,16 @@ animations = [{
 "speed": 5.0
 }]
 
-[node name="Player" type="CharacterBody2D"]
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_7jcr5"]
+size = Vector2(35, 45)
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(12, -12)
-shape = SubResource("RectangleShape2D_7jcr5")
+[node name="Player" type="CharacterBody2D"]
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 position = Vector2(0, 1)
 sprite_frames = SubResource("SpriteFrames_1ybyp")
-animation = &"duck"
+animation = &"idle"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(1.5, 2.5)
+shape = SubResource("RectangleShape2D_7jcr5")
