@@ -1,0 +1,20 @@
+[gd_scene load_steps=4 format=3 uid="uid://244vrfggngwh"]
+
+[ext_resource type="Script" path="res://Escenas/player.gd" id="1_b3ger"]
+[ext_resource type="Texture2D" uid="uid://ch2h64mdd25cv" path="res://Assets/Merio.png" id="2_88cre"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_uxaws"]
+size = Vector2(173.07, 335.323)
+
+[node name="Player" type="CharacterBody2D"]
+script = ExtResource("1_b3ger")
+
+[node name="Sprite2D2" type="Sprite2D" parent="."]
+position = Vector2(50, 673)
+scale = Vector2(0.0924479, 0.0924479)
+texture = ExtResource("2_88cre")
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="."]
+position = Vector2(50, 672.5)
+scale = Vector2(0.0924479, 0.0924479)
+shape = SubResource("RectangleShape2D_uxaws")
