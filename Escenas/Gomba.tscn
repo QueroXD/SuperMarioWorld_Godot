@@ -1,0 +1,133 @@
+[gd_scene load_steps=14 format=3 uid="uid://c78pvqnr20n4j"]
+
+[ext_resource type="Script" path="res://enemy.gd" id="1_03aiu"]
+[ext_resource type="Texture2D" uid="uid://dgs80ep4qlsvt" path="res://Assets/smw_enemies_sheet.png" id="2_esial"]
+[ext_resource type="Texture2D" uid="uid://b8qajynkwtvjg" path="res://Assets/smw_enemies_sheet_CAMBIO.png" id="3_dncjt"]
+
+[sub_resource type="SeparationRayShape2D" id="SeparationRayShape2D_2ldik"]
+length = 7.0
+
+[sub_resource type="SeparationRayShape2D" id="SeparationRayShape2D_0xleb"]
+length = 7.99995
+
+[sub_resource type="SeparationRayShape2D" id="SeparationRayShape2D_hbm5j"]
+length = 8.99946
+
+[sub_resource type="SeparationRayShape2D" id="SeparationRayShape2D_4xrdw"]
+length = 7.99962
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_eh7cg"]
+atlas = ExtResource("2_esial")
+region = Rect2(51, 325, 18, 20)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_vwk3f"]
+atlas = ExtResource("2_esial")
+region = Rect2(11, 325, 18, 20)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_0ra7b"]
+atlas = ExtResource("3_dncjt")
+region = Rect2(371, 325, 18, 20)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_l6hsh"]
+atlas = ExtResource("3_dncjt")
+region = Rect2(411, 325, 18, 20)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_gb81n"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_eh7cg")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_vwk3f")
+}],
+"loop": true,
+"name": &"run_left",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_0ra7b")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_l6hsh")
+}],
+"loop": true,
+"name": &"run_right",
+"speed": 5.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_4slw8"]
+size = Vector2(17, 17)
+
+[node name="Gomba" type="CharacterBody2D"]
+script = ExtResource("1_03aiu")
+
+[node name="CollisionButton" type="CollisionShape2D" parent="."]
+z_index = 1
+position = Vector2(0, -1)
+shape = SubResource("SeparationRayShape2D_2ldik")
+
+[node name="CollisionRight" type="CollisionShape2D" parent="."]
+z_index = 1
+position = Vector2(-1.90735e-06, -1)
+rotation = -1.56718
+shape = SubResource("SeparationRayShape2D_0xleb")
+
+[node name="CollisionTop" type="CollisionShape2D" parent="."]
+z_index = 1
+position = Vector2(0, -1)
+rotation = 3.13065
+shape = SubResource("SeparationRayShape2D_hbm5j")
+
+[node name="CollisionLeft" type="CollisionShape2D" parent="."]
+z_index = 2
+position = Vector2(0, -1)
+rotation = 1.5806
+shape = SubResource("SeparationRayShape2D_4xrdw")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+position = Vector2(0, -1)
+sprite_frames = SubResource("SpriteFrames_gb81n")
+animation = &"run_right"
+
+[node name="Timer" type="Timer" parent="."]
+
+[node name="InteractionPoints" type="Area2D" parent="."]
+
+[node name="Button" type="CollisionShape2D" parent="InteractionPoints"]
+z_index = 1
+position = Vector2(0, -1)
+shape = SubResource("SeparationRayShape2D_2ldik")
+
+[node name="Right" type="CollisionShape2D" parent="InteractionPoints"]
+z_index = 1
+position = Vector2(-1.90735e-06, -1)
+rotation = -1.56718
+shape = SubResource("SeparationRayShape2D_0xleb")
+
+[node name="Top" type="CollisionShape2D" parent="InteractionPoints"]
+z_index = 1
+position = Vector2(0, -1)
+rotation = 3.13065
+shape = SubResource("SeparationRayShape2D_hbm5j")
+
+[node name="Left" type="CollisionShape2D" parent="InteractionPoints"]
+z_index = 2
+position = Vector2(0, -1)
+rotation = 1.5806
+shape = SubResource("SeparationRayShape2D_4xrdw")
+
+[node name="PlayerHitBox" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="PlayerHitBox"]
+position = Vector2(0, -2)
+shape = SubResource("RectangleShape2D_4slw8")
+
+[node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="."]
+position = Vector2(2, -1.5)
+scale = Vector2(3.6, 0.45)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, -2)
+shape = SubResource("RectangleShape2D_4slw8")

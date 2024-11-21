@@ -1,10 +1,12 @@
-[gd_scene load_steps=8 format=3 uid="uid://0jriilkxk044"]
+[gd_scene load_steps=10 format=3 uid="uid://0jriilkxk044"]
 
 [ext_resource type="Script" path="res://Escenas/game.gd" id="1_5vf7i"]
 [ext_resource type="Texture2D" uid="uid://b8ia4ny15hns7" path="res://Assets/bg2.png" id="1_b536i"]
 [ext_resource type="Texture2D" uid="uid://cq4n0054otd3v" path="res://Assets/tiles.png" id="1_prh6o"]
-[ext_resource type="PackedScene" uid="uid://c4l7hxaahtxdf" path="res://Escenas/Player.tscn" id="5_pjyjm"]
+[ext_resource type="PackedScene" uid="uid://cuonlfduijsbo" path="res://Escenas/Player.tscn" id="5_pjyjm"]
+[ext_resource type="PackedScene" uid="uid://c78pvqnr20n4j" path="res://Escenas/Gomba.tscn" id="6_705og"]
 [ext_resource type="Script" path="res://Escenas/player.gd" id="6_ninda"]
+[ext_resource type="PackedScene" uid="uid://bjgcs6wl6wlmd" path="res://Escenas/Koopa.tscn" id="7_uug53"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_y7ltr"]
 texture = ExtResource("1_prh6o")
@@ -511,3 +513,9 @@ drag_top_margin = 1.0
 drag_right_margin = 0.7
 drag_bottom_margin = 0.0
 editor_draw_limits = true
+
+[node name="Gomba" parent="." instance=ExtResource("6_705og")]
+position = Vector2(644, 682)
+
+[node name="Koopa" parent="." instance=ExtResource("7_uug53")]
+position = Vector2(1514, 613)

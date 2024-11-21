@@ -1,16 +1,16 @@
-[gd_scene load_steps=31 format=3 uid="uid://cuonlfduijsbo"]
+[gd_scene load_steps=35 format=3 uid="uid://cuonlfduijsbo"]
 
 [ext_resource type="Texture2D" uid="uid://brlrwo02orld3" path="res://Assets/Mario Animacion.png" id="1_7n7hb"]
 [ext_resource type="Texture2D" uid="uid://grduarhke2te" path="res://Assets/Mario AnimacionLadoOpuesto.png" id="2_lyvn8"]
 [ext_resource type="Texture2D" uid="uid://c5l2mau07q1u7" path="res://Assets/mario.png" id="2_mxvoc"]
 
+[sub_resource type="AtlasTexture" id="AtlasTexture_rufpj"]
+atlas = ExtResource("2_lyvn8")
+region = Rect2(487, 0, 37, 65)
+
 [sub_resource type="AtlasTexture" id="AtlasTexture_e5ax0"]
 atlas = ExtResource("1_7n7hb")
 region = Rect2(375, 0, 37, 65)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_5xbyk"]
-atlas = ExtResource("2_lyvn8")
-region = Rect2(487, 10, 38, 48)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_tjjus"]
 atlas = ExtResource("1_7n7hb")
@@ -28,9 +28,9 @@ region = Rect2(858, 10, 38, 48)
 atlas = ExtResource("1_7n7hb")
 region = Rect2(4, 0, 37, 65)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_warwn"]
-atlas = ExtResource("2_mxvoc")
-region = Rect2(149, 29, 21, 29)
+[sub_resource type="AtlasTexture" id="AtlasTexture_jikas"]
+atlas = ExtResource("2_lyvn8")
+region = Rect2(710, 0, 37, 65)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_ja2to"]
 atlas = ExtResource("1_7n7hb")
@@ -108,13 +108,18 @@ region = Rect2(42, 0, 37, 65)
 animations = [{
 "frames": [{
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_e5ax0")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_5xbyk")
+"texture": SubResource("AtlasTexture_rufpj")
 }],
 "loop": true,
-"name": &"duck",
+"name": &"duck_left",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_e5ax0")
+}],
+"loop": true,
+"name": &"duck_right",
 "speed": 5.0
 }, {
 "frames": [{
@@ -151,7 +156,7 @@ animations = [{
 }, {
 "frames": [{
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_warwn")
+"texture": SubResource("AtlasTexture_jikas")
 }],
 "loop": true,
 "name": &"jump_left",
@@ -250,6 +255,18 @@ animations = [{
 "speed": 5.0
 }]
 
+[sub_resource type="SeparationRayShape2D" id="SeparationRayShape2D_psd3y"]
+length = 25.0
+
+[sub_resource type="SeparationRayShape2D" id="SeparationRayShape2D_omvpo"]
+length = 17.0035
+
+[sub_resource type="SeparationRayShape2D" id="SeparationRayShape2D_rggc4"]
+length = 18.0099
+
+[sub_resource type="SeparationRayShape2D" id="SeparationRayShape2D_l3ecn"]
+length = 12.9994
+
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_7jcr5"]
 size = Vector2(35, 45)
 
@@ -258,7 +275,37 @@ size = Vector2(35, 45)
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 position = Vector2(0, 1)
 sprite_frames = SubResource("SpriteFrames_1ybyp")
-animation = &"idle_left"
+animation = &"idle_right"
+
+[node name="InteractionPoints" type="Area2D" parent="."]
+
+[node name="CollisionButton" type="CollisionShape2D" parent="InteractionPoints"]
+z_index = 2
+position = Vector2(1.90735e-06, 0)
+shape = SubResource("SeparationRayShape2D_psd3y")
+
+[node name="CollisionRight" type="CollisionShape2D" parent="InteractionPoints"]
+z_index = 2
+rotation = -1.56718
+shape = SubResource("SeparationRayShape2D_omvpo")
+
+[node name="CollisionTop" type="CollisionShape2D" parent="InteractionPoints"]
+z_index = 2
+position = Vector2(1.90735e-06, 0)
+rotation = 3.13065
+shape = SubResource("SeparationRayShape2D_rggc4")
+
+[node name="CollisionLeft" type="CollisionShape2D" parent="InteractionPoints"]
+z_index = 2
+position = Vector2(1.90735e-06, 0)
+rotation = 1.5806
+shape = SubResource("SeparationRayShape2D_l3ecn")
+
+[node name="HitBox" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HitBox"]
+position = Vector2(1.5, 2.5)
+shape = SubResource("RectangleShape2D_7jcr5")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(1.5, 2.5)
