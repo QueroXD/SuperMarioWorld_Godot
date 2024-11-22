@@ -24,8 +24,6 @@ func _ready():
 	#Colision Mario + Enemigo
 	collision.connect("body_entered", Callable(self, "_on_body_entered"))
 	
-	
-	
 func _on_screen_entered():
 	on_screen = true  # Marca al Gompa como visible
 	timer.start()  # Inicia el temporizador
@@ -36,8 +34,8 @@ func _on_screen_exited():
 
 func _on_body_entered(body):
 	if body.name == "Player":  # Cambia "Player" por el nombre exacto del nodo de Mario
-		print(position.x)
-		print(body.position.x)
+		#print(position.x)
+		#print(body.position.x)
 		if is_colliding_with_top(body):
 			queue_free() # Eliminar Gomba
 
@@ -61,7 +59,7 @@ func is_colliding_with_top(body):
 		#if mario_center_x >= gompa_left and mario_center_x <= gompa_right:  # Dentro del rango horizontal
 			#return true
 	#return false
-	var mario_bottom = body.position.y
+	#var mario_bottom = body.position.y
 	var collision_shape = $CollisionShape2D
 
 	if (body.position.y+collision_shape.shape.extents.y) >= position.y or (body.position.y-collision_shape.shape.extents.y) >= position.y:
@@ -77,6 +75,7 @@ func move_enemy(delta):
 	position += direction * speed * delta
 	
 func _on_timer_timeout():
+	print("muerome2")
 	# Cambia la dirección y animación cada 4 segundos
 	if direction == Vector2.LEFT:
 		direction = Vector2.RIGHT

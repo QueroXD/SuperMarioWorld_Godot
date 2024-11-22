@@ -275,7 +275,7 @@ size = Vector2(35, 45)
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 position = Vector2(0, 1)
 sprite_frames = SubResource("SpriteFrames_1ybyp")
-animation = &"idle_right"
+animation = &"run"
 
 [node name="InteractionPoints" type="Area2D" parent="."]
 
@@ -310,3 +310,7 @@ shape = SubResource("RectangleShape2D_7jcr5")
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(1.5, 2.5)
 shape = SubResource("RectangleShape2D_7jcr5")
+
+[node name="TimerSprite" type="Timer" parent="."]
+wait_time = 0.2
+autostart = true
