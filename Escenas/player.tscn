@@ -1,9 +1,13 @@
-[gd_scene load_steps=36 format=3 uid="uid://cuonlfduijsbo"]
+[gd_scene load_steps=37 format=3 uid="uid://cuonlfduijsbo"]
 
 [ext_resource type="Texture2D" uid="uid://brlrwo02orld3" path="res://Assets/Mario Animacion.png" id="1_7n7hb"]
 [ext_resource type="Script" path="res://Escenas/player.gd" id="1_uiktl"]
 [ext_resource type="Texture2D" uid="uid://grduarhke2te" path="res://Assets/Mario AnimacionLadoOpuesto.png" id="2_lyvn8"]
 [ext_resource type="Texture2D" uid="uid://c5l2mau07q1u7" path="res://Assets/mario.png" id="2_mxvoc"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_1dd2b"]
+atlas = ExtResource("1_7n7hb")
+region = Rect2(857, 0, 36, 65)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_rufpj"]
 atlas = ExtResource("2_lyvn8")
@@ -107,6 +111,14 @@ region = Rect2(42, 0, 37, 65)
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_1ybyp"]
 animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_1dd2b")
+}],
+"loop": true,
+"name": &"die",
+"speed": 5.0
+}, {
 "frames": [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_rufpj")
@@ -277,7 +289,7 @@ script = ExtResource("1_uiktl")
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 position = Vector2(0, 1)
 sprite_frames = SubResource("SpriteFrames_1ybyp")
-animation = &"run"
+animation = &"duck_right"
 
 [node name="InteractionPoints" type="Area2D" parent="."]
 

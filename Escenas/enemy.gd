@@ -4,6 +4,8 @@ extends Node2D
 @export var speed: float = 25.0
 @export var direction: Vector2 = Vector2.LEFT
 var on_screen: bool = false
+var standit: bool = false
+var move: bool = false
 
 # Referencias a nodos hijos
 @onready var animated_sprite = $AnimatedSprite2D
@@ -31,7 +33,7 @@ func _on_screen_exited():
 	timer.stop()  # Inicia el temporizador
 
 func _physics_process(delta):
-	if on_screen:
+	if on_screen && (standit == false || move == true):
 		move_enemy(delta)
 
 func move_enemy(delta):
@@ -39,32 +41,41 @@ func move_enemy(delta):
 	position += direction * speed * delta
 	
 func _on_timer_timeout():
-	# Cambia la dirección y animación cada 4 segundos
-	if direction == Vector2.LEFT:
-		direction = Vector2.RIGHT
-		animated_sprite.play("run_right")
-	else:
-		direction = Vector2.LEFT
-		animated_sprite.play("run_left")
+	if (standit == false):
+		# Cambia la dirección y animación cada 4 segundos
+		if direction == Vector2.LEFT:
+			direction = Vector2.RIGHT
+			animated_sprite.play("run_right")
+		else:
+			direction = Vector2.LEFT
+			animated_sprite.play("run_left")
 
-	# Reinicia el temporizador
-	timer.start()
+		# Reinicia el temporizador
+		timer.start()
 
 func _on_interaction_points_area_entered(area: Area2D) -> void:
 	if (area.name == "Mario"):
 		var player_position = area.global_position	
 		if name.contains("Koopa"):  # Basado en el nombre del nodo
-			print(player_position.y)
-			print(position.y)
 			if player_position.y > 587 && player_position.y < 589:
-				print("El jugador viene desde arriba")
-				queue_free()  # Elimina al enemigo
+				if standit == false:
+					animated_sprite.play("stand")
+					timer.stop()  # Inicia el temporizador
+					standit = true;
+				else:
+					queue_free()  # Elimina al enemigo
 			else:
-				print("El jugador no viene desde arriba")
+				if standit == true:
+					move = true
+					if (Input.get_action_strength("ui_right")):
+						direction = Vector2.RIGHT
+					elif (Input.get_action_strength("ui_left")):
+						direction = Vector2.LEFT
+				else:
+					print("Jugador muerto")
 		elif name.contains("Gomba"):  # Basado en el nombre del nodo
 			# Comprueba si el jugador está cayendo desde arriba
 			if player_position.y > 661 && player_position.y < 663:
-				print("El jugador viene desde arriba")
 				queue_free()  # Elimina al enemigo
 			else:
-				print("El jugador no viene desde arriba")
+				print("Jugador muerto")

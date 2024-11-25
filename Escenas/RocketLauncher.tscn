@@ -1,0 +1,25 @@
+[gd_scene load_steps=4 format=3 uid="uid://4gr2ck1ik0u"]
+
+[ext_resource type="Script" path="res://Escenas/rocket_launcher.gd" id="1_5m5kx"]
+[ext_resource type="Texture2D" uid="uid://dgs80ep4qlsvt" path="res://Assets/smw_enemies_sheet.png" id="2_ic0o5"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_eh3cv"]
+size = Vector2(17, 34)
+
+[node name="RocketLauncher" type="StaticBody2D"]
+script = ExtResource("1_5m5kx")
+
+[node name="FireTimer" type="Timer" parent="."]
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("2_ic0o5")
+region_enabled = true
+region_rect = Rect2(218.908, 1115.58, 18.627, 35.1145)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(-0.5, 0)
+shape = SubResource("RectangleShape2D_eh3cv")
+
+[node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="."]
+position = Vector2(2, -1.5)
+scale = Vector2(3.6, 0.45)

@@ -1,0 +1,25 @@
+[gd_scene load_steps=4 format=3 uid="uid://dw3u2kyx2n6jd"]
+
+[ext_resource type="Script" path="res://Escenas/rocket.gd" id="1_e2j8d"]
+[ext_resource type="Texture2D" uid="uid://dgs80ep4qlsvt" path="res://Assets/smw_enemies_sheet.png" id="2_7c2dr"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_yjusb"]
+radius = 6.98918
+height = 17.999
+
+[node name="Rocket" type="Area2D"]
+script = ExtResource("1_e2j8d")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("2_7c2dr")
+region_enabled = true
+region_rect = Rect2(179.579, 1126.58, 16.4724, 14.7606)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(1, 0)
+rotation = -1.58124
+shape = SubResource("CapsuleShape2D_yjusb")
+
+[node name="TimerDelete" type="Timer" parent="."]
+
+[connection signal="area_entered" from="." to="." method="_on_area_entered"]
