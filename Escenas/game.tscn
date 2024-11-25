@@ -1,11 +1,10 @@
-[gd_scene load_steps=8 format=4 uid="uid://0jriilkxk044"]
+[gd_scene load_steps=7 format=4 uid="uid://0jriilkxk044"]
 
 [ext_resource type="Script" path="res://Escenas/game.gd" id="1_5vf7i"]
 [ext_resource type="Texture2D" uid="uid://b8ia4ny15hns7" path="res://Assets/bg2.png" id="1_b536i"]
-[ext_resource type="TileSet" uid="uid://bqfcoq531d3be" path="res://Assets/Lvl1.tres" id="3_altct"]
-[ext_resource type="PackedScene" uid="uid://cuonlfduijsbo" path="res://Escenas/player.tscn" id="5_pjyjm"]
+[ext_resource type="TileSet" uid="uid://bwhtlgm7x7ehu" path="res://Assets/Lvl1.tres" id="3_altct"]
+[ext_resource type="PackedScene" uid="uid://cuonlfduijsbo" path="res://Escenas/Player.tscn" id="5_pjyjm"]
 [ext_resource type="PackedScene" uid="uid://c78pvqnr20n4j" path="res://Escenas/Gomba.tscn" id="6_705og"]
-[ext_resource type="Script" path="res://Escenas/player.gd" id="6_ninda"]
 [ext_resource type="PackedScene" uid="uid://bjgcs6wl6wlmd" path="res://Escenas/Koopa.tscn" id="7_uug53"]
 
 [node name="Game" type="Node2D"]
@@ -63,7 +62,6 @@ tile_set = ExtResource("3_altct")
 [node name="Player" parent="." instance=ExtResource("5_pjyjm")]
 position = Vector2(66, 678)
 scale = Vector2(0.376443, 0.376443)
-script = ExtResource("6_ninda")
 
 [node name="Camera2D" type="Camera2D" parent="Player"]
 position = Vector2(340.025, -212.516)

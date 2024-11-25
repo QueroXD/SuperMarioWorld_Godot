@@ -7,14 +7,16 @@ const MOVE_SPEED = 200.0
 const MOVE_DUCK_SPEED = 50.0
 const JUMP_FORCE = -500.0
 const MAX_FALL_SPEED = 900.0
-const FIRST_FLOOR_HEIGHT = 669
 
 @onready var animated_sprite = $AnimatedSprite2D
 @onready var collision = $CollisionShape2D
 @onready var TimerSprite = $TimerSprite
 var originaJumpDirection = 0
+var originalDuckDirection = 0
 var lastMoveDirection = 0
 var input_direction = 0
+var JUMPED_DUCK = false
+
 
 func _ready():
 	animated_sprite.animation = "idle_right"
@@ -27,7 +29,8 @@ func _physics_process(delta):
 		velocity.y += GRAVITY * delta
 	else:
 		velocity.y = 0
-		originaJumpDirection = 0;
+		originaJumpDirection = 0
+		JUMPED_DUCK = false
 
 	# Movimiento horizontal
 	input_direction = Input.get_action_strength("ui_right") - Input.get_action_strength("ui_left")
@@ -40,37 +43,40 @@ func _physics_process(delta):
 	# Límite de velocidad de caída
 	velocity.y = clamp(velocity.y, -INF, MAX_FALL_SPEED)
 
-	# Animaciones
+	 #Animaciones
 	if (Input.is_action_pressed("ui_down")): # Agachado
 		velocity.x = input_direction * MOVE_DUCK_SPEED
-		if position.y < FIRST_FLOOR_HEIGHT:
+		if (Input.is_action_pressed("ui_up") and JUMPED_DUCK == false):
 			#animated_sprite.animation = "duck_right" if (input_direction > 0) else "duck_left"
+			velocity.y = JUMP_DUCK
 			if (input_direction > 0):
 				animated_sprite.animation = "duck_right"
+				originalDuckDirection = 1
 			elif (input_direction < 0):
 				animated_sprite.animation = "duck_left"
+				originalDuckDirection = -1
+			JUMPED_DUCK = true
 			animated_sprite.play()
 		else:
-			velocity.y = JUMP_DUCK
-			
-	elif position.y < FIRST_FLOOR_HEIGHT:  # En el aire
-		if (input_direction >= 0 and originaJumpDirection != -1):
+			if ((input_direction >= 0) and (lastMoveDirection != -1)):
+				animated_sprite.animation = "duck_right"
+			else:
+				animated_sprite.animation = "duck_left"
+			animated_sprite.play()
+	elif not is_on_floor():  # En el aire
+		if (input_direction >= 0 and lastMoveDirection != -1):
 			animated_sprite.animation = "jump_right"
-			originaJumpDirection = 1
 		else:
 			animated_sprite.animation = "jump_left"
-			originaJumpDirection = -1
 		animated_sprite.play()
 	elif input_direction != 0:
 		# Movimiento horizontal
 		if input_direction > 0: # Derecha
 			animated_sprite.animation = "walk_right"
 			lastMoveDirection = 1
-			animated_sprite.flip_h = false
 		elif input_direction < 0: # Izquierda
 			animated_sprite.animation = "walk_left"
 			lastMoveDirection = -1
-			animated_sprite.flip_h = false # Para hacer un espejo del sprite escojido    
 		animated_sprite.play()
 	# Movimiento
 	move_and_slide()

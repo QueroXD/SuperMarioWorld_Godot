@@ -11,6 +11,7 @@ var on_screen: bool = false
 @onready var collision = $InteractionPoints
 @onready var timer = $Timer
 
+
 func _ready():
 	# Inicia animaciones y temporizadores si es necesario
 	animated_sprite.play("run_left")  # Cambia "walk" por el nombre de tu animación
@@ -21,9 +22,6 @@ func _ready():
 	notifier.connect("screen_entered", Callable(self, "_on_screen_entered"))
 	notifier.connect("screen_exited", Callable(self, "_on_screen_exited"))
 	
-	#Colision Mario + Enemigo
-	collision.connect("body_entered", Callable(self, "_on_body_entered"))
-	
 func _on_screen_entered():
 	on_screen = true  # Marca al Gompa como visible
 	timer.start()  # Inicia el temporizador
@@ -31,40 +29,6 @@ func _on_screen_entered():
 func _on_screen_exited():
 	on_screen = false  # Marca al Gompa como no visible
 	timer.stop()  # Inicia el temporizador
-
-func _on_body_entered(body):
-	if body.name == "Player":  # Cambia "Player" por el nombre exacto del nodo de Mario
-		#print(position.x)
-		#print(body.position.x)
-		if is_colliding_with_top(body):
-			queue_free() # Eliminar Gomba
-
-# Función para verificar si Mario colide con la parte superior del Gompa
-func is_colliding_with_top(body):
-	## Obtener la posición y el tamaño del CollisionShape2D del Gompa
-	#var collision_shape = $CollisionShape2D
-	#if not collision_shape or not collision_shape.shape:
-		#return false  # Si no hay una forma válida, no hay colisión
-#
-	#var gompa_top = position.y - collision_shape.shape.extents.y  # Línea superior del Gompa
-	#var gompa_left = position.x - collision_shape.shape.extents.x  # Borde izquierdo
-	#var gompa_right = position.x + collision_shape.shape.extents.x  # Borde derecho
-#
-	## Obtener la posición de Mario (body)
-	#var mario_bottom = body.position.y + body.get_node("CollisionShape2D").shape.extents.y
-	#var mario_center_x = body.position.x  # Punto central en X de Mario
-#
-	## Verificar si Mario toca la "línea superior" del Gompa
-	#if mario_bottom >= gompa_top and mario_bottom <= gompa_top + 5:  # Línea superior con un margen
-		#if mario_center_x >= gompa_left and mario_center_x <= gompa_right:  # Dentro del rango horizontal
-			#return true
-	#return false
-	#var mario_bottom = body.position.y
-	var collision_shape = $CollisionShape2D
-
-	if (body.position.y+collision_shape.shape.extents.y) >= position.y or (body.position.y-collision_shape.shape.extents.y) >= position.y:
-		return true
-	return false
 
 func _physics_process(delta):
 	if on_screen:
@@ -75,7 +39,6 @@ func move_enemy(delta):
 	position += direction * speed * delta
 	
 func _on_timer_timeout():
-	print("muerome2")
 	# Cambia la dirección y animación cada 4 segundos
 	if direction == Vector2.LEFT:
 		direction = Vector2.RIGHT
@@ -86,3 +49,22 @@ func _on_timer_timeout():
 
 	# Reinicia el temporizador
 	timer.start()
+
+func _on_interaction_points_area_entered(area: Area2D) -> void:
+	if (area.name == "Mario"):
+		var player_position = area.global_position	
+		if name.contains("Koopa"):  # Basado en el nombre del nodo
+			print(player_position.y)
+			print(position.y)
+			if player_position.y > 587 && player_position.y < 589:
+				print("El jugador viene desde arriba")
+				queue_free()  # Elimina al enemigo
+			else:
+				print("El jugador no viene desde arriba")
+		elif name.contains("Gomba"):  # Basado en el nombre del nodo
+			# Comprueba si el jugador está cayendo desde arriba
+			if player_position.y > 661 && player_position.y < 663:
+				print("El jugador viene desde arriba")
+				queue_free()  # Elimina al enemigo
+			else:
+				print("El jugador no viene desde arriba")

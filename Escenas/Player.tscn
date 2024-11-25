@@ -1,6 +1,7 @@
-[gd_scene load_steps=35 format=3 uid="uid://cuonlfduijsbo"]
+[gd_scene load_steps=36 format=3 uid="uid://cuonlfduijsbo"]
 
 [ext_resource type="Texture2D" uid="uid://brlrwo02orld3" path="res://Assets/Mario Animacion.png" id="1_7n7hb"]
+[ext_resource type="Script" path="res://Escenas/player.gd" id="1_uiktl"]
 [ext_resource type="Texture2D" uid="uid://grduarhke2te" path="res://Assets/Mario AnimacionLadoOpuesto.png" id="2_lyvn8"]
 [ext_resource type="Texture2D" uid="uid://c5l2mau07q1u7" path="res://Assets/mario.png" id="2_mxvoc"]
 
@@ -271,6 +272,7 @@ length = 12.9994
 size = Vector2(35, 45)
 
 [node name="Player" type="CharacterBody2D"]
+script = ExtResource("1_uiktl")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 position = Vector2(0, 1)
@@ -301,9 +303,9 @@ position = Vector2(1.90735e-06, 0)
 rotation = 1.5806
 shape = SubResource("SeparationRayShape2D_l3ecn")
 
-[node name="HitBox" type="Area2D" parent="."]
+[node name="Mario" type="Area2D" parent="."]
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="HitBox"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Mario"]
 position = Vector2(1.5, 2.5)
 shape = SubResource("RectangleShape2D_7jcr5")
 
@@ -314,3 +316,5 @@ shape = SubResource("RectangleShape2D_7jcr5")
 [node name="TimerSprite" type="Timer" parent="."]
 wait_time = 0.2
 autostart = true
+
+[connection signal="area_entered" from="Mario" to="." method="_on_mario_area_entered"]
