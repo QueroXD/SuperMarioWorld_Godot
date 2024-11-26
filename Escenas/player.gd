@@ -11,11 +11,14 @@ const MAX_FALL_SPEED = 900.0
 @onready var animated_sprite = $AnimatedSprite2D
 @onready var collision = $CollisionShape2D
 @onready var TimerSprite = $TimerSprite
+@onready var TimeDead = $TimeDead
 var originaJumpDirection = 0
 var originalDuckDirection = 0
 var lastMoveDirection = 0
 var input_direction = 0
 var JUMPED_DUCK = false
+var alive = true
+
 
 
 func _ready():
@@ -23,7 +26,29 @@ func _ready():
 	animated_sprite.play()
 	TimerSprite.connect("timeout", Callable(self, "gestorIdle"))  # Conecta la señal del temporizador
 
+#	Señal recibida del script de enemy.gd
+	for enemy in get_tree().get_nodes_in_group("enemy"):
+		enemy.connect("player_died", Callable(self, "_on_player_died"))
+
+func _on_player_died():
+	# Mario muerte
+	alive = false
+	animated_sprite.play("die")
+	TimeDead.connect("timeout", Callable(self, "gestionarMuerte"))  # Conecta la señal del temporizador
+	#timeDead.Start()
+	print(position.y)
+	position.y -= 20
+	print(position.y)
+
+func gestionarMuerte():
+	position.y -= 20
+
 func _physics_process(delta):
+	if not alive:
+		# Detener el movimiento y la gravedad
+		velocity = Vector2.ZERO  # Detiene el movimiento completamente
+		return
+	
 	# Gravedad
 	if not is_on_floor():
 		velocity.y += GRAVITY * delta
@@ -44,7 +69,7 @@ func _physics_process(delta):
 	velocity.y = clamp(velocity.y, -INF, MAX_FALL_SPEED)
 
 	 #Animaciones
-	if (Input.is_action_pressed("ui_down")): # Agachado
+	if (Input.is_action_pressed("ui_down") and alive == true): # Agachado
 		velocity.x = input_direction * MOVE_DUCK_SPEED
 		if (Input.is_action_pressed("ui_up") and JUMPED_DUCK == false):
 			#animated_sprite.animation = "duck_right" if (input_direction > 0) else "duck_left"
@@ -63,13 +88,13 @@ func _physics_process(delta):
 			else:
 				animated_sprite.animation = "duck_left"
 			animated_sprite.play()
-	elif not is_on_floor():  # En el aire
+	elif not is_on_floor() && alive == true:  # En el aire
 		if (input_direction >= 0 and lastMoveDirection != -1):
 			animated_sprite.animation = "jump_right"
 		else:
 			animated_sprite.animation = "jump_left"
 		animated_sprite.play()
-	elif input_direction != 0:
+	elif input_direction != 0 && alive == true:
 		# Movimiento horizontal
 		if input_direction > 0: # Derecha
 			animated_sprite.animation = "walk_right"
@@ -82,7 +107,7 @@ func _physics_process(delta):
 	move_and_slide()
 	
 func gestorIdle():
-	if ((not Input.is_action_pressed("ui_down")) and (not Input.is_action_pressed("ui_up")) and (not Input.is_action_pressed("ui_right")) and ( not Input.is_action_pressed("ui_left"))):
+	if (alive == true and (not Input.is_action_pressed("ui_down")) and (not Input.is_action_pressed("ui_up")) and (not Input.is_action_pressed("ui_right")) and ( not Input.is_action_pressed("ui_left"))):
 		#animated_sprite.animation = "idle_left" if (input_direction < 0) else "idle_right"
 		if (input_direction < 0 or lastMoveDirection == -1):
 			animated_sprite.animation = "idle_left"

@@ -1,4 +1,4 @@
-[gd_scene load_steps=37 format=3 uid="uid://cuonlfduijsbo"]
+[gd_scene load_steps=38 format=3 uid="uid://cuonlfduijsbo"]
 
 [ext_resource type="Texture2D" uid="uid://brlrwo02orld3" path="res://Assets/Mario Animacion.png" id="1_7n7hb"]
 [ext_resource type="Script" path="res://Escenas/player.gd" id="1_uiktl"]
@@ -8,6 +8,10 @@
 [sub_resource type="AtlasTexture" id="AtlasTexture_1dd2b"]
 atlas = ExtResource("1_7n7hb")
 region = Rect2(857, 0, 36, 65)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_1mvy0"]
+atlas = ExtResource("2_lyvn8")
+region = Rect2(8, 0, 37, 65)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_rufpj"]
 atlas = ExtResource("2_lyvn8")
@@ -114,6 +118,9 @@ animations = [{
 "frames": [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_1dd2b")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_1mvy0")
 }],
 "loop": true,
 "name": &"die",
@@ -289,7 +296,7 @@ script = ExtResource("1_uiktl")
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 position = Vector2(0, 1)
 sprite_frames = SubResource("SpriteFrames_1ybyp")
-animation = &"duck_right"
+animation = &"die"
 
 [node name="InteractionPoints" type="Area2D" parent="."]
 
@@ -327,6 +334,10 @@ shape = SubResource("RectangleShape2D_7jcr5")
 
 [node name="TimerSprite" type="Timer" parent="."]
 wait_time = 0.2
+autostart = true
+
+[node name="TimeDead" type="Timer" parent="."]
+wait_time = 0.5
 autostart = true
 
 [connection signal="area_entered" from="Mario" to="." method="_on_mario_area_entered"]

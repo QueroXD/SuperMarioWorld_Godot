@@ -6,12 +6,16 @@ extends Node2D
 var on_screen: bool = false
 var standit: bool = false
 var move: bool = false
+var alive: bool = true
 
 # Referencias a nodos hijos
 @onready var animated_sprite = $AnimatedSprite2D
 @onready var notifier = $VisibleOnScreenNotifier2D
 @onready var collision = $InteractionPoints
 @onready var timer = $Timer
+
+# Señales
+signal player_died
 
 
 func _ready():
@@ -33,7 +37,7 @@ func _on_screen_exited():
 	timer.stop()  # Inicia el temporizador
 
 func _physics_process(delta):
-	if on_screen && (standit == false || move == true):
+	if on_screen && (standit == false || move == true) && alive == true:
 		move_enemy(delta)
 
 func move_enemy(delta):
@@ -71,11 +75,20 @@ func _on_interaction_points_area_entered(area: Area2D) -> void:
 						direction = Vector2.RIGHT
 					elif (Input.get_action_strength("ui_left")):
 						direction = Vector2.LEFT
+					speed = 75.00
 				else:
+					died()
 					print("Jugador muerto")
 		elif name.contains("Gomba"):  # Basado en el nombre del nodo
 			# Comprueba si el jugador está cayendo desde arriba
 			if player_position.y > 661 && player_position.y < 663:
 				queue_free()  # Elimina al enemigo
 			else:
+				died()
 				print("Jugador muerto")
+				
+func died():
+	alive = false
+	animated_sprite.stop()
+	timer.stop()  # Inicia el temporizador
+	emit_signal("player_died")  # Envía la señal al jugador
