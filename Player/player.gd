@@ -36,9 +36,6 @@ func _on_player_died():
 	alive = false
 	animated_sprite.play("die")
 	TimeDead.connect("timeout", Callable(self, "gestionarMuerte"))  # Conecta la señal del temporizador
-	#timeDead.Start()
-	print(position.y)
-	print(position.y)
 
 func gestionarMuerte():
 	if (position.y <= 640.00):
@@ -94,12 +91,16 @@ func _physics_process(delta):
 			else:
 				animated_sprite.animation = "duck_left"
 			animated_sprite.play()
+		$Mario/CollisionShape2D.set_process(false) 
+		$CollisionShape2D.set_process(false) 
 	elif not is_on_floor() && alive == true:  # En el aire
 		if (input_direction >= 0 and lastMoveDirection != -1):
 			animated_sprite.animation = "jump_right"
 		else:
 			animated_sprite.animation = "jump_left"
 		animated_sprite.play()
+		$Mario/CollisionShape2D.set_process(true) 
+		$CollisionShape2D.set_process(true) 
 	elif input_direction != 0 && alive == true:
 		# Movimiento horizontal
 		if input_direction > 0: # Derecha
@@ -108,6 +109,8 @@ func _physics_process(delta):
 		elif input_direction < 0: # Izquierda
 			animated_sprite.animation = "walk_left"
 			lastMoveDirection = -1
+		$Mario/CollisionShape2D.set_process(true) 
+		$CollisionShape2D.set_process(true) 
 		animated_sprite.play()
 	# Movimiento
 	move_and_slide()

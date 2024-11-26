@@ -1,4 +1,4 @@
-[gd_scene load_steps=38 format=3 uid="uid://cuonlfduijsbo"]
+[gd_scene load_steps=39 format=3 uid="uid://cuonlfduijsbo"]
 
 [ext_resource type="Texture2D" uid="uid://brlrwo02orld3" path="res://Assets/Mario Animacion.png" id="1_7n7hb"]
 [ext_resource type="Script" path="res://Player/player.gd" id="1_wqxug"]
@@ -290,13 +290,16 @@ length = 12.9994
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_7jcr5"]
 size = Vector2(35, 45)
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_t71vt"]
+size = Vector2(28, 26)
+
 [node name="Player" type="CharacterBody2D"]
 script = ExtResource("1_wqxug")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 position = Vector2(0, 1)
 sprite_frames = SubResource("SpriteFrames_1ybyp")
-animation = &"die"
+animation = &"duck_left"
 
 [node name="InteractionPoints" type="Area2D" parent="."]
 
@@ -328,6 +331,10 @@ shape = SubResource("SeparationRayShape2D_l3ecn")
 position = Vector2(1.5, 2.5)
 shape = SubResource("RectangleShape2D_7jcr5")
 
+[node name="CollisionShape2D_duck" type="CollisionShape2D" parent="Mario"]
+position = Vector2(2, 10)
+shape = SubResource("RectangleShape2D_t71vt")
+
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(1.5, 2.5)
 shape = SubResource("RectangleShape2D_7jcr5")
@@ -337,7 +344,11 @@ wait_time = 0.2
 autostart = true
 
 [node name="TimeDead" type="Timer" parent="."]
-wait_time = 0.5
+wait_time = 0.1
 autostart = true
+
+[node name="CollisionShape2D_duck" type="CollisionShape2D" parent="."]
+position = Vector2(2, 10)
+shape = SubResource("RectangleShape2D_t71vt")
 
 [connection signal="area_entered" from="Mario" to="." method="_on_mario_area_entered"]

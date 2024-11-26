@@ -3,7 +3,7 @@ extends Node2D
 @export var fire_rate: float = 5  # Tiempo entre disparos en segundos
 @onready var rocket_scene: PackedScene = preload("res://Enemigos/rocket.tscn")
 
-@onready var launch_point = $LaunchPoint
+#@onready var launch_point = $LaunchPoint
 @onready var fire_timer = $FireTimer
 @onready var notifier = $VisibleOnScreenNotifier2D
 

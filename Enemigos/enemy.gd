@@ -7,6 +7,8 @@ var on_screen: bool = false
 var standit: bool = false
 var move: bool = false
 var alive: bool = true
+var petit: bool = false
+var petitx2: bool = false
 
 # Referencias a nodos hijos
 @onready var animated_sprite = $AnimatedSprite2D
@@ -49,10 +51,22 @@ func _on_timer_timeout():
 		# Cambia la dirección y animación cada 4 segundos
 		if direction == Vector2.LEFT:
 			direction = Vector2.RIGHT
-			animated_sprite.play("run_right")
+			if petit == true:
+				$InteractionPoints/CollisionShape2D_Mini.set_process(true) 
+				$CollisionShape2D_Mini.set_process(true) 
+				animated_sprite.play("run_mini_right")
+				petitx2 = false
+			else:
+				animated_sprite.play("run_right")
 		else:
 			direction = Vector2.LEFT
-			animated_sprite.play("run_left")
+			if petit == true:
+				$InteractionPoints/CollisionShape2D_Mini.set_process(true) 
+				$CollisionShape2D_Mini.set_process(true) 
+				animated_sprite.play("run_mini_left")
+				petitx2 = false
+			else:
+				animated_sprite.play("run_left")
 
 		# Reinicia el temporizador
 		timer.start()
@@ -86,7 +100,33 @@ func _on_interaction_points_area_entered(area: Area2D) -> void:
 			else:
 				died()
 				print("Jugador muerto")
-				
+		elif name.contains("Ankylosaurus"):
+			print(player_position.y)
+			print(petitx2)
+			if player_position.y > 646 && player_position.y < 648:
+				petit = true
+				$InteractionPoints/CollisionShape2D_Mayor.queue_free()
+				$CollisionShape2D_Mayor.queue_free()
+				if direction == Vector2.RIGHT:
+					animated_sprite.play("run_mini_right")
+				else:
+					animated_sprite.play("run_mini_left")
+			elif petitx2 == false && petit == true && player_position.y > 663 && player_position.y < 665:
+				$InteractionPoints/CollisionShape2D_Mini.set_process(false) 
+				$CollisionShape2D_Mini.set_process(false) 
+				petitx2 = true
+				if direction == Vector2.RIGHT:
+					animated_sprite.play("enemy_dead_right")
+				else:
+					animated_sprite.play("enemy_dead_left")
+			elif (petitx2 == true && ((player_position.y > 668 && player_position.y < 670) or (player_position.y > 663 && player_position.y < 665))):
+				$InteractionPoints/CollisionShape2D_Mini.queue_free()
+				$CollisionShape2D_Mini.queue_free()
+				queue_free()
+			else:
+				died()
+				print("Jugador muerto")
+
 func died():
 	alive = false
 	animated_sprite.stop()

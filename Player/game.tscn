@@ -33,4 +33,4 @@ drag_bottom_margin = 0.0
 editor_draw_limits = true
 
 [node name="RocketLauncher" parent="." instance=ExtResource("7_fp6mi")]
-position = Vector2(1104, 672)
+position = Vector2(2252, 670)
