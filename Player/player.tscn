@@ -1,7 +1,7 @@
 [gd_scene load_steps=38 format=3 uid="uid://cuonlfduijsbo"]
 
 [ext_resource type="Texture2D" uid="uid://brlrwo02orld3" path="res://Assets/Mario Animacion.png" id="1_7n7hb"]
-[ext_resource type="Script" path="res://Escenas/player.gd" id="1_uiktl"]
+[ext_resource type="Script" path="res://Player/player.gd" id="1_wqxug"]
 [ext_resource type="Texture2D" uid="uid://grduarhke2te" path="res://Assets/Mario AnimacionLadoOpuesto.png" id="2_lyvn8"]
 [ext_resource type="Texture2D" uid="uid://c5l2mau07q1u7" path="res://Assets/mario.png" id="2_mxvoc"]
 
@@ -291,7 +291,7 @@ length = 12.9994
 size = Vector2(35, 45)
 
 [node name="Player" type="CharacterBody2D"]
-script = ExtResource("1_uiktl")
+script = ExtResource("1_wqxug")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 position = Vector2(0, 1)

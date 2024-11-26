@@ -1,13 +1,13 @@
 [gd_scene load_steps=4 format=3 uid="uid://4gr2ck1ik0u"]
 
-[ext_resource type="Script" path="res://Escenas/rocket_launcher.gd" id="1_5m5kx"]
+[ext_resource type="Script" path="res://Enemigos/rocket_launcher.gd" id="1_xvobk"]
 [ext_resource type="Texture2D" uid="uid://dgs80ep4qlsvt" path="res://Assets/smw_enemies_sheet.png" id="2_ic0o5"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_eh3cv"]
 size = Vector2(17, 34)
 
 [node name="RocketLauncher" type="StaticBody2D"]
-script = ExtResource("1_5m5kx")
+script = ExtResource("1_xvobk")
 
 [node name="FireTimer" type="Timer" parent="."]
 

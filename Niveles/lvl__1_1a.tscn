@@ -2,8 +2,8 @@
 
 [ext_resource type="Texture2D" uid="uid://b8ia4ny15hns7" path="res://Assets/bg2.png" id="1_xjsvt"]
 [ext_resource type="TileSet" uid="uid://bwhtlgm7x7ehu" path="res://Assets/Lvl1.tres" id="2_vlp8o"]
-[ext_resource type="PackedScene" uid="uid://c78pvqnr20n4j" path="res://Escenas/Gomba.tscn" id="3_ifxbu"]
-[ext_resource type="PackedScene" uid="uid://bjgcs6wl6wlmd" path="res://Escenas/Koopa.tscn" id="4_q5qto"]
+[ext_resource type="PackedScene" uid="uid://c78pvqnr20n4j" path="res://Enemigos/Gomba.tscn" id="3_ifxbu"]
+[ext_resource type="PackedScene" uid="uid://bjgcs6wl6wlmd" path="res://Enemigos/Koopa.tscn" id="4_q5qto"]
 
 [node name="lvl _1-1a" type="Node2D"]
 
@@ -26,6 +26,7 @@ texture = ExtResource("1_xjsvt")
 metadata/_edit_use_anchors_ = true
 
 [node name="Background2" type="TextureRect" parent="Background Image/Background"]
+layout_mode = 0
 offset_left = 510.0
 offset_top = 1.0
 offset_right = 1022.0
@@ -34,6 +35,7 @@ texture = ExtResource("1_xjsvt")
 metadata/_edit_use_anchors_ = true
 
 [node name="Background3" type="TextureRect" parent="Background Image/Background/Background2"]
+layout_mode = 0
 offset_left = 512.0
 offset_top = -1.0
 offset_right = 1024.0
@@ -42,6 +44,7 @@ texture = ExtResource("1_xjsvt")
 metadata/_edit_use_anchors_ = true
 
 [node name="Background4" type="TextureRect" parent="Background Image/Background/Background2/Background3"]
+layout_mode = 0
 offset_left = 510.0
 offset_top = 1.0
 offset_right = 1022.0
@@ -50,6 +53,7 @@ texture = ExtResource("1_xjsvt")
 metadata/_edit_use_anchors_ = true
 
 [node name="Background5" type="TextureRect" parent="Background Image/Background/Background2/Background3/Background4"]
+layout_mode = 0
 offset_left = 512.0
 offset_top = -1.0
 offset_right = 1024.0
@@ -72,6 +76,7 @@ texture = ExtResource("1_xjsvt")
 metadata/_edit_use_anchors_ = true
 
 [node name="Background6" type="TextureRect" parent="Background Image/Background/Background2/Background3/Background4/Background5/Background6"]
+layout_mode = 0
 offset_left = 512.0
 offset_right = 1024.0
 offset_bottom = 432.0
@@ -79,6 +84,7 @@ texture = ExtResource("1_xjsvt")
 metadata/_edit_use_anchors_ = true
 
 [node name="Background6" type="TextureRect" parent="Background Image/Background/Background2/Background3/Background4/Background5/Background6/Background6"]
+layout_mode = 0
 offset_left = 512.0
 offset_right = 1024.0
 offset_bottom = 432.0
@@ -86,6 +92,7 @@ texture = ExtResource("1_xjsvt")
 metadata/_edit_use_anchors_ = true
 
 [node name="Background6" type="TextureRect" parent="Background Image/Background/Background2/Background3/Background4/Background5/Background6/Background6/Background6"]
+layout_mode = 0
 offset_left = 512.0
 offset_right = 1024.0
 offset_bottom = 432.0
@@ -93,6 +100,7 @@ texture = ExtResource("1_xjsvt")
 metadata/_edit_use_anchors_ = true
 
 [node name="Background6" type="TextureRect" parent="Background Image/Background/Background2/Background3/Background4/Background5/Background6/Background6/Background6/Background6"]
+layout_mode = 0
 offset_left = 512.0
 offset_top = -1.0
 offset_right = 1024.0
@@ -101,6 +109,7 @@ texture = ExtResource("1_xjsvt")
 metadata/_edit_use_anchors_ = true
 
 [node name="Background6" type="TextureRect" parent="Background Image/Background/Background2/Background3/Background4/Background5/Background6/Background6/Background6/Background6/Background6"]
+layout_mode = 0
 offset_left = 512.0
 offset_right = 1024.0
 offset_bottom = 432.0
@@ -108,6 +117,7 @@ texture = ExtResource("1_xjsvt")
 metadata/_edit_use_anchors_ = true
 
 [node name="Background6" type="TextureRect" parent="Background Image/Background/Background2/Background3/Background4/Background5/Background6/Background6/Background6/Background6/Background6/Background6"]
+layout_mode = 0
 offset_left = 512.0
 offset_top = -1.0
 offset_right = 1024.0
@@ -116,6 +126,7 @@ texture = ExtResource("1_xjsvt")
 metadata/_edit_use_anchors_ = true
 
 [node name="Background6" type="TextureRect" parent="Background Image/Background/Background2/Background3/Background4/Background5/Background6/Background6/Background6/Background6/Background6/Background6/Background6"]
+layout_mode = 0
 offset_left = 512.0
 offset_top = -1.0
 offset_right = 1024.0

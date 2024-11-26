@@ -1,6 +1,6 @@
 [gd_scene load_steps=4 format=3 uid="uid://dw3u2kyx2n6jd"]
 
-[ext_resource type="Script" path="res://Escenas/rocket.gd" id="1_e2j8d"]
+[ext_resource type="Script" path="res://Enemigos/rocket.gd" id="1_c1koi"]
 [ext_resource type="Texture2D" uid="uid://dgs80ep4qlsvt" path="res://Assets/smw_enemies_sheet.png" id="2_7c2dr"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_yjusb"]
@@ -8,7 +8,7 @@ radius = 30.967
 height = 68.0172
 
 [node name="Rocket" type="Area2D"]
-script = ExtResource("1_e2j8d")
+script = ExtResource("1_c1koi")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 texture = ExtResource("2_7c2dr")
