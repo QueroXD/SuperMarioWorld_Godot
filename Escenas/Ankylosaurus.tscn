@@ -1,0 +1,93 @@
+[gd_scene load_steps=12 format=3 uid="uid://dsaolxwt3a47n"]
+
+[ext_resource type="Script" path="res://Escenas/enemy.gd" id="1_aev7e"]
+[ext_resource type="Texture2D" uid="uid://dgs80ep4qlsvt" path="res://Assets/smw_enemies_sheet.png" id="2_uwlr1"]
+[ext_resource type="Texture2D" uid="uid://b8qajynkwtvjg" path="res://Assets/smw_enemies_sheet_CAMBIO.png" id="3_ld1ta"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_t4vnj"]
+atlas = ExtResource("2_uwlr1")
+region = Rect2(132, 0, 18, 28)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ymnx1"]
+atlas = ExtResource("2_uwlr1")
+region = Rect2(92, 0, 18, 28)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_5o35d"]
+atlas = ExtResource("3_ld1ta")
+region = Rect2(292, 0, 18, 28)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_j7xpv"]
+atlas = ExtResource("3_ld1ta")
+region = Rect2(330, 0, 18, 28)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_tsy4n"]
+atlas = ExtResource("2_uwlr1")
+region = Rect2(12, 0, 16, 22)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_gb81n"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_t4vnj")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ymnx1")
+}],
+"loop": true,
+"name": &"run_left",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_5o35d")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_j7xpv")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_tsy4n")
+}],
+"loop": true,
+"name": &"run_right",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_tsy4n")
+}],
+"loop": true,
+"name": &"stand",
+"speed": 5.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_7wtvr"]
+size = Vector2(16, 28)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_4slw8"]
+size = Vector2(14, 27)
+
+[node name="Ankylosaurus" type="CharacterBody2D"]
+script = ExtResource("1_aev7e")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+position = Vector2(0, -1)
+sprite_frames = SubResource("SpriteFrames_gb81n")
+animation = &"run_left"
+
+[node name="Timer" type="Timer" parent="."]
+
+[node name="InteractionPoints" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="InteractionPoints"]
+position = Vector2(-1, -2)
+shape = SubResource("RectangleShape2D_7wtvr")
+
+[node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="."]
+position = Vector2(2, -1.5)
+scale = Vector2(3.6, 0.45)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(-1, -1.5)
+shape = SubResource("RectangleShape2D_4slw8")
+
+[connection signal="area_entered" from="InteractionPoints" to="." method="_on_interaction_points_area_entered"]
