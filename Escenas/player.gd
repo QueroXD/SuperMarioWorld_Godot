@@ -18,6 +18,7 @@ var lastMoveDirection = 0
 var input_direction = 0
 var JUMPED_DUCK = false
 var alive = true
+var cambio = false
 
 
 
@@ -37,11 +38,16 @@ func _on_player_died():
 	TimeDead.connect("timeout", Callable(self, "gestionarMuerte"))  # Conecta la señal del temporizador
 	#timeDead.Start()
 	print(position.y)
-	position.y -= 20
 	print(position.y)
 
 func gestionarMuerte():
-	position.y -= 20
+	if (position.y <= 640.00):
+		cambio = true
+
+	if (cambio == false):
+		position.y -= 3
+	elif (cambio == true):
+		position.y += 3
 
 func _physics_process(delta):
 	if not alive:

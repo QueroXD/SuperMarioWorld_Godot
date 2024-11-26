@@ -4,8 +4,8 @@
 [ext_resource type="Texture2D" uid="uid://dgs80ep4qlsvt" path="res://Assets/smw_enemies_sheet.png" id="2_7c2dr"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_yjusb"]
-radius = 6.98918
-height = 17.999
+radius = 30.967
+height = 68.0172
 
 [node name="Rocket" type="Area2D"]
 script = ExtResource("1_e2j8d")
@@ -13,13 +13,17 @@ script = ExtResource("1_e2j8d")
 [node name="Sprite2D" type="Sprite2D" parent="."]
 texture = ExtResource("2_7c2dr")
 region_enabled = true
-region_rect = Rect2(179.579, 1126.58, 16.4724, 14.7606)
+region_rect = Rect2(7.06325, 1162.18, 65.3586, 62.7)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(1, 0)
+position = Vector2(2, 0)
 rotation = -1.58124
 shape = SubResource("CapsuleShape2D_yjusb")
 
 [node name="TimerDelete" type="Timer" parent="."]
+
+[node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="."]
+position = Vector2(3, 0)
+scale = Vector2(11.4, 1)
 
 [connection signal="area_entered" from="." to="." method="_on_area_entered"]

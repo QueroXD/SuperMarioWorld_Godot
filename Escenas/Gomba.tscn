@@ -46,10 +46,10 @@ animations = [{
 }]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_m4343"]
-size = Vector2(18, 18)
+size = Vector2(16, 17)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_4slw8"]
-size = Vector2(16.5, 16)
+size = Vector2(14, 16)
 
 [node name="Gomba" type="CharacterBody2D" groups=["enemy"]]
 script = ExtResource("1_03aiu")
@@ -64,7 +64,7 @@ animation = &"run_right"
 [node name="InteractionPoints" type="Area2D" parent="."]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="InteractionPoints"]
-position = Vector2(0, -3)
+position = Vector2(0, -2.5)
 shape = SubResource("RectangleShape2D_m4343")
 
 [node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="."]

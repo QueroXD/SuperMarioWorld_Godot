@@ -58,7 +58,7 @@ func _on_timer_timeout():
 		timer.start()
 
 func _on_interaction_points_area_entered(area: Area2D) -> void:
-	if (area.name == "Mario"):
+	if (area.name == "Mario"&& alive == true ):
 		var player_position = area.global_position	
 		if name.contains("Koopa"):  # Basado en el nombre del nodo
 			if player_position.y > 587 && player_position.y < 589:

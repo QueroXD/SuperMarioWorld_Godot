@@ -1,8 +1,8 @@
 [gd_scene load_steps=5 format=3 uid="uid://0jriilkxk044"]
 
 [ext_resource type="Script" path="res://Escenas/game.gd" id="1_5vf7i"]
-[ext_resource type="PackedScene" uid="uid://ctcyy1cdrewyr" path="res://Escenas/lvl__1_1a.tscn" id="2_nw7v0"]
-[ext_resource type="PackedScene" uid="uid://cuonlfduijsbo" path="res://Escenas/player.tscn" id="5_pjyjm"]
+[ext_resource type="PackedScene" path="res://Escenas/lvl__1_1a.tscn" id="2_nw7v0"]
+[ext_resource type="PackedScene" uid="uid://cuonlfduijsbo" path="res://Escenas/Player.tscn" id="5_pjyjm"]
 [ext_resource type="PackedScene" uid="uid://4gr2ck1ik0u" path="res://Escenas/RocketLauncher.tscn" id="7_fp6mi"]
 
 [node name="Game" type="Node2D"]

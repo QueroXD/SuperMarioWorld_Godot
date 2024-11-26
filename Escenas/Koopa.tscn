@@ -61,29 +61,25 @@ animations = [{
 }]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_7wtvr"]
-size = Vector2(20, 29)
+size = Vector2(16, 28)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_4slw8"]
-size = Vector2(18.5, 27)
+size = Vector2(14, 27)
 
-[node name="Koopa" type="CharacterBody2D" groups=["enemy"]]
+[node name="Koopa" type="CharacterBody2D"]
 script = ExtResource("1_qaeyl")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 position = Vector2(0, -1)
 sprite_frames = SubResource("SpriteFrames_gb81n")
-animation = &"stand"
-
-[node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="AnimatedSprite2D"]
-position = Vector2(2, -1.5)
-scale = Vector2(3.6, 0.45)
+animation = &"run_left"
 
 [node name="Timer" type="Timer" parent="."]
 
 [node name="InteractionPoints" type="Area2D" parent="."]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="InteractionPoints"]
-position = Vector2(-0.25, -2.5)
+position = Vector2(-1, -2)
 shape = SubResource("RectangleShape2D_7wtvr")
 
 [node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="."]
@@ -91,7 +87,7 @@ position = Vector2(2, -1.5)
 scale = Vector2(3.6, 0.45)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(-0.25, -1.5)
+position = Vector2(-1, -1.5)
 shape = SubResource("RectangleShape2D_4slw8")
 
 [connection signal="area_entered" from="InteractionPoints" to="." method="_on_interaction_points_area_entered"]
