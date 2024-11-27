@@ -19,6 +19,7 @@ var input_direction = 0
 var JUMPED_DUCK = false
 var alive = true
 var cambio = false
+var CoinContador = 0
 
 
 
@@ -30,6 +31,14 @@ func _ready():
 #	Señal recibida del script de enemy.gd
 	for enemy in get_tree().get_nodes_in_group("enemy"):
 		enemy.connect("player_died", Callable(self, "_on_player_died"))
+
+#	Señal recibida del script coin.gd
+	for coin in get_tree().get_nodes_in_group("coin"):
+		coin.connect("coin_obteined", Callable(self, "_on_coin_obteined"))
+
+func _on_coin_obteined():
+	CoinContador = CoinContador + 1
+	print(CoinContador)
 
 func _on_player_died():
 	# Mario muerte
@@ -51,7 +60,7 @@ func _physics_process(delta):
 		# Detener el movimiento y la gravedad
 		velocity = Vector2.ZERO  # Detiene el movimiento completamente
 		return
-	
+		
 	# Gravedad
 	if not is_on_floor():
 		velocity.y += GRAVITY * delta
@@ -74,6 +83,7 @@ func _physics_process(delta):
 	 #Animaciones
 	if (Input.is_action_pressed("ui_down") and alive == true): # Agachado
 		velocity.x = input_direction * MOVE_DUCK_SPEED
+		_activate_duck_collision()
 		if (Input.is_action_pressed("ui_up") and JUMPED_DUCK == false):
 			#animated_sprite.animation = "duck_right" if (input_direction > 0) else "duck_left"
 			velocity.y = JUMP_DUCK
@@ -91,16 +101,13 @@ func _physics_process(delta):
 			else:
 				animated_sprite.animation = "duck_left"
 			animated_sprite.play()
-		$Mario/CollisionShape2D.set_process(false) 
-		$CollisionShape2D.set_process(false) 
 	elif not is_on_floor() && alive == true:  # En el aire
 		if (input_direction >= 0 and lastMoveDirection != -1):
 			animated_sprite.animation = "jump_right"
 		else:
 			animated_sprite.animation = "jump_left"
 		animated_sprite.play()
-		$Mario/CollisionShape2D.set_process(true) 
-		$CollisionShape2D.set_process(true) 
+		
 	elif input_direction != 0 && alive == true:
 		# Movimiento horizontal
 		if input_direction > 0: # Derecha
@@ -109,9 +116,9 @@ func _physics_process(delta):
 		elif input_direction < 0: # Izquierda
 			animated_sprite.animation = "walk_left"
 			lastMoveDirection = -1
-		$Mario/CollisionShape2D.set_process(true) 
-		$CollisionShape2D.set_process(true) 
 		animated_sprite.play()
+		_activate_standing_collision()  # Activar colisiones de pie
+		
 	# Movimiento
 	move_and_slide()
 	
@@ -126,3 +133,17 @@ func gestorIdle():
 		
 	# Reinicia el temporizador
 	TimerSprite.start()
+
+func _activate_duck_collision():
+	# Desactivar las colisiones de pie
+	$Mario/CollisionShape2D.set_disabled(true)
+	# Activar las colisiones de agachado
+	$Mario/CollisionShape2D_duck.set_disabled(false)
+
+func _activate_standing_collision():
+	# Desactivar las colisiones de agachado
+	$Mario/CollisionShape2D_duck.set_disabled(true)
+	# Activar las colisiones de pie
+	$Mario/CollisionShape2D.set_disabled(false)
+	
+	

@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=4 uid="uid://ctcyy1cdrewyr"]
+[gd_scene load_steps=9 format=4 uid="uid://ctcyy1cdrewyr"]
 
 [ext_resource type="Texture2D" uid="uid://b8ia4ny15hns7" path="res://Assets/bg2.png" id="1_xjsvt"]
 [ext_resource type="TileSet" uid="uid://bwhtlgm7x7ehu" path="res://Assets/Lvl1.tres" id="2_vlp8o"]
@@ -6,6 +6,8 @@
 [ext_resource type="PackedScene" uid="uid://bjgcs6wl6wlmd" path="res://Enemigos/Koopa.tscn" id="4_q5qto"]
 [ext_resource type="PackedScene" uid="uid://dsaolxwt3a47n" path="res://Enemigos/Ankylosaurus.tscn" id="5_kd7fc"]
 [ext_resource type="PackedScene" uid="uid://di3ku2bbe1vyi" path="res://Enemigos/rocket.tscn" id="6_e7sbe"]
+[ext_resource type="PackedScene" uid="uid://cvda2apmghbg4" path="res://Enemigos/koopa_otaku.tscn" id="7_jyi58"]
+[ext_resource type="PackedScene" uid="uid://japy27d606u4" path="res://Recompensas/coin.tscn" id="8_8i2j1"]
 
 [node name="lvl _1-1a" type="Node2D"]
 
@@ -166,3 +168,12 @@ position = Vector2(275, 656)
 
 [node name="Rocket" parent="." instance=ExtResource("6_e7sbe")]
 position = Vector2(4198, 642)
+
+[node name="Koopa_otaku" parent="." instance=ExtResource("7_jyi58")]
+position = Vector2(390, 543)
+
+[node name="Coin" parent="." instance=ExtResource("8_8i2j1")]
+position = Vector2(132, 590)
+
+[node name="Ankylosaurus2" parent="." instance=ExtResource("5_kd7fc")]
+position = Vector2(3910, 656)

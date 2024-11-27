@@ -30,6 +30,9 @@ func _ready():
 	notifier.connect("screen_entered", Callable(self, "_on_screen_entered"))
 	notifier.connect("screen_exited", Callable(self, "_on_screen_exited"))
 	
+	for enemy in get_tree().get_nodes_in_group("enemy_other"):
+		enemy.connect("player_died_other", Callable(self, "died"))
+	
 func _on_screen_entered():
 	on_screen = true  # Marca al Gompa como visible
 	timer.start()  # Inicia el temporizador
@@ -72,7 +75,7 @@ func _on_timer_timeout():
 		timer.start()
 
 func _on_interaction_points_area_entered(area: Area2D) -> void:
-	if (area.name == "Mario"&& alive == true ):
+	if (area.name == "Mario" && alive == true ):
 		var player_position = area.global_position	
 		if name.contains("Koopa"):  # Basado en el nombre del nodo
 			if player_position.y > 587 && player_position.y < 589:
@@ -126,6 +129,7 @@ func _on_interaction_points_area_entered(area: Area2D) -> void:
 			else:
 				died()
 				print("Jugador muerto")
+		
 
 func died():
 	alive = false

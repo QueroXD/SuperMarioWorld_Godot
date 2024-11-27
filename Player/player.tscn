@@ -1,4 +1,4 @@
-[gd_scene load_steps=39 format=3 uid="uid://cuonlfduijsbo"]
+[gd_scene load_steps=35 format=3 uid="uid://cuonlfduijsbo"]
 
 [ext_resource type="Texture2D" uid="uid://brlrwo02orld3" path="res://Assets/Mario Animacion.png" id="1_7n7hb"]
 [ext_resource type="Script" path="res://Player/player.gd" id="1_wqxug"]
@@ -275,18 +275,6 @@ animations = [{
 "speed": 5.0
 }]
 
-[sub_resource type="SeparationRayShape2D" id="SeparationRayShape2D_psd3y"]
-length = 25.0
-
-[sub_resource type="SeparationRayShape2D" id="SeparationRayShape2D_omvpo"]
-length = 17.0035
-
-[sub_resource type="SeparationRayShape2D" id="SeparationRayShape2D_rggc4"]
-length = 18.0099
-
-[sub_resource type="SeparationRayShape2D" id="SeparationRayShape2D_l3ecn"]
-length = 12.9994
-
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_7jcr5"]
 size = Vector2(35, 45)
 
@@ -301,41 +289,19 @@ position = Vector2(0, 1)
 sprite_frames = SubResource("SpriteFrames_1ybyp")
 animation = &"duck_left"
 
-[node name="InteractionPoints" type="Area2D" parent="."]
-
-[node name="CollisionButton" type="CollisionShape2D" parent="InteractionPoints"]
-z_index = 2
-position = Vector2(1.90735e-06, 0)
-shape = SubResource("SeparationRayShape2D_psd3y")
-
-[node name="CollisionRight" type="CollisionShape2D" parent="InteractionPoints"]
-z_index = 2
-rotation = -1.56718
-shape = SubResource("SeparationRayShape2D_omvpo")
-
-[node name="CollisionTop" type="CollisionShape2D" parent="InteractionPoints"]
-z_index = 2
-position = Vector2(1.90735e-06, 0)
-rotation = 3.13065
-shape = SubResource("SeparationRayShape2D_rggc4")
-
-[node name="CollisionLeft" type="CollisionShape2D" parent="InteractionPoints"]
-z_index = 2
-position = Vector2(1.90735e-06, 0)
-rotation = 1.5806
-shape = SubResource("SeparationRayShape2D_l3ecn")
-
 [node name="Mario" type="Area2D" parent="."]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Mario"]
+visible = false
 position = Vector2(1.5, 2.5)
 shape = SubResource("RectangleShape2D_7jcr5")
 
 [node name="CollisionShape2D_duck" type="CollisionShape2D" parent="Mario"]
-position = Vector2(2, 10)
+position = Vector2(2, 12)
 shape = SubResource("RectangleShape2D_t71vt")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+visible = false
 position = Vector2(1.5, 2.5)
 shape = SubResource("RectangleShape2D_7jcr5")
 
@@ -348,7 +314,7 @@ wait_time = 0.1
 autostart = true
 
 [node name="CollisionShape2D_duck" type="CollisionShape2D" parent="."]
-position = Vector2(2, 10)
+position = Vector2(2, 12)
 shape = SubResource("RectangleShape2D_t71vt")
 
 [connection signal="area_entered" from="Mario" to="." method="_on_mario_area_entered"]

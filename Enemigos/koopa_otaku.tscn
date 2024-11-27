@@ -1,0 +1,48 @@
+[gd_scene load_steps=7 format=3 uid="uid://cvda2apmghbg4"]
+
+[ext_resource type="Script" path="res://Enemigos/koopa_otaku.gd" id="1_3kmia"]
+[ext_resource type="Texture2D" uid="uid://dgs80ep4qlsvt" path="res://Assets/smw_enemies_sheet.png" id="1_88sot"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_rxm8y"]
+radius = 7.98912
+height = 18.0199
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_gew0a"]
+atlas = ExtResource("1_88sot")
+region = Rect2(212, 285, 17, 19)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_tvymv"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_gew0a")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_u1qqp"]
+radius = 6.9996
+height = 13.9992
+
+[node name="Koopa_otaku" type="CharacterBody2D" groups=["enemy_other"]]
+script = ExtResource("1_3kmia")
+
+[node name="InteractionPoints" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="InteractionPoints"]
+z_index = 2
+position = Vector2(0, -1)
+rotation = -1.58124
+shape = SubResource("CapsuleShape2D_rxm8y")
+
+[node name="Sprite2D" type="AnimatedSprite2D" parent="."]
+position = Vector2(1, 0)
+sprite_frames = SubResource("SpriteFrames_tvymv")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+rotation = -1.58124
+shape = SubResource("CapsuleShape2D_u1qqp")
+
+[connection signal="area_entered" from="InteractionPoints" to="." method="_on_interaction_points_area_entered"]
