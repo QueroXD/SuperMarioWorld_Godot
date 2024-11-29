@@ -1,0 +1,155 @@
+[gd_scene load_steps=10 format=3 uid="uid://75ufrji4qy4v"]
+
+[ext_resource type="Texture2D" uid="uid://cubv6intjsvt7" path="res://Assets/coins.png" id="1_0mdh0"]
+[ext_resource type="FontFile" uid="uid://dumh8udfscuum" path="res://Assets/Super-Mario-World.ttf" id="2_uyr7y"]
+[ext_resource type="Texture2D" uid="uid://bo0k7q67sl36e" path="res://Assets/cross.png" id="3_7cwyt"]
+[ext_resource type="Texture2D" uid="uid://r3yr1gc4kln2" path="res://Assets/star.png" id="4_hnvuw"]
+[ext_resource type="Texture2D" uid="uid://cjwbd2f8ebymx" path="res://Assets/marco.png" id="4_ot2q8"]
+[ext_resource type="Texture2D" uid="uid://bpdabvqi3yjeg" path="res://Assets/coin.png" id="6_er2hi"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_0erkd"]
+line_spacing = 4.0
+font = ExtResource("2_uyr7y")
+font_size = 23
+font_color = Color(0.870588, 0.768627, 0.2, 1)
+outline_size = 10
+outline_color = Color(0, 0, 0, 1)
+
+[sub_resource type="LabelSettings" id="LabelSettings_t4bwl"]
+font = ExtResource("2_uyr7y")
+font_size = 20
+font_color = Color(0.86924, 0.175756, 0.200055, 1)
+outline_size = 10
+outline_color = Color(0, 0, 0, 1)
+
+[sub_resource type="LabelSettings" id="LabelSettings_46swe"]
+font = ExtResource("2_uyr7y")
+font_size = 20
+outline_size = 10
+outline_color = Color(0, 0, 0, 1)
+
+[node name="HUD" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="coins" type="TextureRect" parent="CanvasLayer"]
+offset_left = 1081.0
+offset_top = 32.0
+offset_right = 1128.0
+offset_bottom = 55.0
+texture = ExtResource("1_0mdh0")
+
+[node name="time" type="Label" parent="CanvasLayer"]
+offset_left = 734.0
+offset_top = 31.0
+offset_right = 850.0
+offset_bottom = 58.0
+text = "TIME"
+label_settings = SubResource("LabelSettings_0erkd")
+horizontal_alignment = 1
+
+[node name="timeNum" type="Label" parent="CanvasLayer/time"]
+offset_left = 2.0
+offset_top = 26.0
+offset_right = 118.0
+offset_bottom = 53.0
+text = "000"
+label_settings = SubResource("LabelSettings_0erkd")
+horizontal_alignment = 1
+
+[node name="mario" type="Label" parent="CanvasLayer"]
+offset_left = 80.0
+offset_top = 28.0
+offset_right = 196.0
+offset_bottom = 55.0
+text = "MARIO"
+label_settings = SubResource("LabelSettings_t4bwl")
+horizontal_alignment = 1
+
+[node name="x" type="TextureRect" parent="CanvasLayer"]
+offset_left = 97.0
+offset_top = 55.0
+offset_right = 119.0
+offset_bottom = 77.0
+texture = ExtResource("3_7cwyt")
+stretch_mode = 4
+
+[node name="x" type="TextureRect" parent="CanvasLayer/x"]
+offset_left = 229.0
+offset_top = -1.0
+offset_right = 251.0
+offset_bottom = 21.0
+texture = ExtResource("3_7cwyt")
+stretch_mode = 4
+
+[node name="TextureRect" type="TextureRect" parent="CanvasLayer/x"]
+layout_mode = 0
+offset_left = 201.0
+offset_top = -1.0
+offset_right = 226.0
+offset_bottom = 22.0
+texture = ExtResource("4_hnvuw")
+
+[node name="numPuntos" type="Label" parent="CanvasLayer"]
+offset_left = 1111.0
+offset_top = 62.0
+offset_right = 1184.0
+offset_bottom = 86.0
+text = "0000"
+label_settings = SubResource("LabelSettings_46swe")
+horizontal_alignment = 2
+vertical_alignment = 1
+
+[node name="numMonedas" type="Label" parent="CanvasLayer"]
+offset_left = 1167.0
+offset_top = 32.0
+offset_right = 1188.0
+offset_bottom = 56.0
+text = "0"
+label_settings = SubResource("LabelSettings_46swe")
+vertical_alignment = 1
+
+[node name="numVidas" type="Label" parent="CanvasLayer"]
+offset_left = 151.0
+offset_top = 56.0
+offset_right = 172.0
+offset_bottom = 80.0
+text = "5"
+label_settings = SubResource("LabelSettings_46swe")
+vertical_alignment = 1
+
+[node name="Marco" type="TextureRect" parent="CanvasLayer"]
+offset_left = 618.0
+offset_top = 24.0
+offset_right = 687.0
+offset_bottom = 85.0
+texture = ExtResource("4_ot2q8")
+expand_mode = 1
+stretch_mode = 4
+
+[node name="monedaEstrella1" type="TextureRect" parent="CanvasLayer"]
+offset_left = 276.0
+offset_top = 25.0
+offset_right = 300.0
+offset_bottom = 49.0
+texture = ExtResource("6_er2hi")
+
+[node name="monedaEstrella2" type="TextureRect" parent="CanvasLayer"]
+offset_left = 300.0
+offset_top = 25.0
+offset_right = 324.0
+offset_bottom = 49.0
+texture = ExtResource("6_er2hi")
+
+[node name="monedaEstrella3" type="TextureRect" parent="CanvasLayer"]
+offset_left = 324.0
+offset_top = 25.0
+offset_right = 348.0
+offset_bottom = 49.0
+texture = ExtResource("6_er2hi")
