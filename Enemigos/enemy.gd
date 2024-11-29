@@ -129,7 +129,9 @@ func _on_interaction_points_area_entered(area: Area2D) -> void:
 			else:
 				died()
 				print("Jugador muerto")
-		
+		elif name.contains("Piranha Plant"):
+			died()
+			print("Jugador muerto")
 
 func died():
 	alive = false

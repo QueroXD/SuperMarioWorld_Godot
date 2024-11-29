@@ -1,4 +1,4 @@
-[gd_scene load_steps=35 format=3 uid="uid://cuonlfduijsbo"]
+[gd_scene load_steps=29 format=3 uid="uid://cuonlfduijsbo"]
 
 [ext_resource type="Texture2D" uid="uid://brlrwo02orld3" path="res://Assets/Mario Animacion.png" id="1_7n7hb"]
 [ext_resource type="Script" path="res://Player/player.gd" id="1_wqxug"]
@@ -52,30 +52,6 @@ region = Rect2(338, 0, 37, 65)
 [sub_resource type="AtlasTexture" id="AtlasTexture_1bdn1"]
 atlas = ExtResource("2_lyvn8")
 region = Rect2(525, 10, 38, 48)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_dmw4t"]
-atlas = ExtResource("1_7n7hb")
-region = Rect2(5, 0, 37, 65)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_rw8f8"]
-atlas = ExtResource("1_7n7hb")
-region = Rect2(116, 0, 37, 65)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_vys3y"]
-atlas = ExtResource("1_7n7hb")
-region = Rect2(79, 0, 37, 65)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_wod2n"]
-atlas = ExtResource("2_lyvn8")
-region = Rect2(785, 10, 35, 48)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_2vvi7"]
-atlas = ExtResource("2_lyvn8")
-region = Rect2(860, 10, 35, 48)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_ldivx"]
-atlas = ExtResource("2_lyvn8")
-region = Rect2(748, 10, 38, 48)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_yh3qq"]
 atlas = ExtResource("1_7n7hb")
@@ -203,29 +179,6 @@ animations = [{
 }, {
 "frames": [{
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_dmw4t")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_rw8f8")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_vys3y")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_wod2n")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_2vvi7")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_ldivx")
-}],
-"loop": true,
-"name": &"run",
-"speed": 5.0
-}, {
-"frames": [{
-"duration": 1.0,
 "texture": SubResource("AtlasTexture_yh3qq")
 }, {
 "duration": 1.0,
@@ -287,7 +240,7 @@ script = ExtResource("1_wqxug")
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 position = Vector2(0, 1)
 sprite_frames = SubResource("SpriteFrames_1ybyp")
-animation = &"duck_left"
+animation = &"fail"
 
 [node name="Mario" type="Area2D" parent="."]
 
@@ -310,11 +263,15 @@ wait_time = 0.2
 autostart = true
 
 [node name="TimeDead" type="Timer" parent="."]
-wait_time = 0.1
+wait_time = 0.01
 autostart = true
 
 [node name="CollisionShape2D_duck" type="CollisionShape2D" parent="."]
 position = Vector2(2, 12)
 shape = SubResource("RectangleShape2D_t71vt")
+
+[node name="TimerPause" type="Timer" parent="."]
+wait_time = 4.0
+autostart = true
 
 [connection signal="area_entered" from="Mario" to="." method="_on_mario_area_entered"]

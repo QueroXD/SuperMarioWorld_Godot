@@ -1,0 +1,73 @@
+[gd_scene load_steps=10 format=3 uid="uid://d2aehkg1su3uv"]
+
+[ext_resource type="Script" path="res://Enemigos/piranha_plant.gd" id="1_rqlri"]
+[ext_resource type="Texture2D" uid="uid://b8qajynkwtvjg" path="res://Assets/smw_enemies_sheet_CAMBIO.png" id="3_4d2ax"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ts8sc"]
+atlas = ExtResource("3_4d2ax")
+region = Rect2(11, 604, 17, 22)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_dh0t1"]
+atlas = ExtResource("3_4d2ax")
+region = Rect2(11, 562, 17, 22)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_8mu0w"]
+atlas = ExtResource("3_4d2ax")
+region = Rect2(11, 523, 17, 22)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_mt8tt"]
+atlas = ExtResource("3_4d2ax")
+region = Rect2(11, 483, 17, 22)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_gb81n"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ts8sc")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_dh0t1")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_8mu0w")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_mt8tt")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_m4343"]
+size = Vector2(14, 18)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_4slw8"]
+size = Vector2(13, 15)
+
+[node name="Piranha" type="CharacterBody2D" groups=["enemy_other"]]
+script = ExtResource("1_rqlri")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+position = Vector2(0, -1)
+sprite_frames = SubResource("SpriteFrames_gb81n")
+
+[node name="Timer" type="Timer" parent="."]
+wait_time = 0.2
+autostart = true
+
+[node name="InteractionPoints" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="InteractionPoints"]
+position = Vector2(0, -2)
+shape = SubResource("RectangleShape2D_m4343")
+
+[node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="."]
+position = Vector2(0.500002, -1.5)
+scale = Vector2(2.45, 0.45)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0.5, -2.5)
+shape = SubResource("RectangleShape2D_4slw8")
+
+[connection signal="area_entered" from="InteractionPoints" to="." method="_on_interaction_points_area_entered"]

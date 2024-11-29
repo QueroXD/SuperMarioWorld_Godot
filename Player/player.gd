@@ -12,6 +12,7 @@ const MAX_FALL_SPEED = 900.0
 @onready var collision = $CollisionShape2D
 @onready var TimerSprite = $TimerSprite
 @onready var TimeDead = $TimeDead
+@onready var TimerPause = $TimerPause
 var originaJumpDirection = 0
 var originalDuckDirection = 0
 var lastMoveDirection = 0
@@ -19,6 +20,7 @@ var input_direction = 0
 var JUMPED_DUCK = false
 var alive = true
 var cambio = false
+var paused = false
 var CoinContador = 0
 
 
@@ -47,12 +49,14 @@ func _on_player_died():
 	TimeDead.connect("timeout", Callable(self, "gestionarMuerte"))  # Conecta la señal del temporizador
 
 func gestionarMuerte():
-	if (position.y <= 640.00):
+	if (position.y <= 600.00):
 		cambio = true
+		TimerPause.connect("timeout", Callable(self, "pause"))
+		
 
 	if (cambio == false):
 		position.y -= 3
-	elif (cambio == true):
+	elif (cambio == true && paused == true):
 		position.y += 3
 
 func _physics_process(delta):
@@ -146,4 +150,6 @@ func _activate_standing_collision():
 	# Activar las colisiones de pie
 	$Mario/CollisionShape2D.set_disabled(false)
 	
+func pause():
+	paused = true
 	
