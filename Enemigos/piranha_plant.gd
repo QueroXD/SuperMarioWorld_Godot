@@ -11,7 +11,6 @@ const JUMP_VELOCITY = -400.0
 
 var on_screen = false
 var cambio = false
-var alive = true
 
 signal player_died_other
 
@@ -29,7 +28,7 @@ func _on_screen_exited():
 		queue_free()
 
 func _physics_process(delta):
-	if on_screen == true && alive == true:
+	if on_screen == true && Global.alive == true:
 		timeChange.connect("timeout", Callable(self, "vuelta"))		
 
 
@@ -39,19 +38,20 @@ func _on_interaction_points_area_entered(area: Area2D) -> void:
 			died()
 	
 func died():
-	alive = false
-	timeChange.queue_free()  # Inicia el temporizador
-	animation_sprite.stop()
-	emit_signal("player_died_other")  # Envía la señal al jugador
+	if Global.alive2 == false:
+		timeChange.queue_free()  # Inicia el temporizador
+		animation_sprite.stop()
+		emit_signal("player_died_other")  # Envía la señal al jugador
+	else:
+		emit_signal("player_died_other")  # Envía la señal al jugador
 
 func vuelta():
-	if cambio == false && alive == true:
+	if cambio == false && Global.alive == true:
 		if position.y <= 550:
 			cambio = true
 		elif position.y >= 550:
 			position.y -= 10
-				
-	elif cambio == true && alive == true:
+	elif cambio == true && Global.alive == true:
 		timeChange.wait_time = 0.4
 		if position.y <= 615:
 			position.y += 4

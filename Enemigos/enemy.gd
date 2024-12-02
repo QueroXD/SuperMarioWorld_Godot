@@ -6,7 +6,6 @@ extends Node2D
 var on_screen: bool = false
 var standit: bool = false
 var move: bool = false
-var alive: bool = true
 var petit: bool = false
 var petitx2: bool = false
 
@@ -18,7 +17,7 @@ var petitx2: bool = false
 
 # Señales
 signal player_died
-
+signal player_down
 
 func _ready():
 	# Inicia animaciones y temporizadores si es necesario
@@ -42,7 +41,7 @@ func _on_screen_exited():
 	timer.stop()  # Inicia el temporizador
 
 func _physics_process(delta):
-	if on_screen && (standit == false || move == true) && alive == true:
+	if on_screen && (standit == false || move == true) && Global.alive == true:
 		move_enemy(delta)
 
 func move_enemy(delta):
@@ -75,7 +74,7 @@ func _on_timer_timeout():
 		timer.start()
 
 func _on_interaction_points_area_entered(area: Area2D) -> void:
-	if (area.name == "Mario" && alive == true ):
+	if (area.name == "Mario" && Global.alive == true ):
 		var player_position = area.global_position	
 		if name.contains("Koopa"):  # Basado en el nombre del nodo
 			if player_position.y > 587 && player_position.y < 589:
@@ -134,7 +133,10 @@ func _on_interaction_points_area_entered(area: Area2D) -> void:
 			print("Jugador muerto")
 
 func died():
-	alive = false
-	animated_sprite.stop()
-	timer.stop()  # Inicia el temporizador
-	emit_signal("player_died")  # Envía la señal al jugador
+	if Global.alive2 == false:
+		Global.alive = false
+		animated_sprite.stop()
+		timer.stop()
+		emit_signal("player_died")  # Envía la señal al jugador
+	elif Global.alive2 == true:
+		emit_signal("player_down")
