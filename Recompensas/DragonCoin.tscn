@@ -1,0 +1,62 @@
+[gd_scene load_steps=12 format=3 uid="uid://daioum7catqmr"]
+
+[ext_resource type="Script" path="res://Recompensas/coin.gd" id="1_md360"]
+[ext_resource type="Texture2D" uid="uid://crptqvay7q4ca" path="res://Assets/Coin/DragonCoin_1.png" id="2_ph0i5"]
+[ext_resource type="Texture2D" uid="uid://dwl8etpnx78ji" path="res://Assets/Coin/DragonCoin_2.png" id="3_n7qyb"]
+[ext_resource type="Texture2D" uid="uid://comxawukwlhvo" path="res://Assets/Coin/DragonCoin_3.png" id="4_vsy6q"]
+[ext_resource type="Texture2D" uid="uid://vs82p3o4cnbb" path="res://Assets/Coin/DragonCoin_4.png" id="5_sepau"]
+[ext_resource type="Texture2D" uid="uid://buih0rn8h7wxc" path="res://Assets/Coin/DragonCoin_5.png" id="6_phxl4"]
+[ext_resource type="Texture2D" uid="uid://d1tdk737chwwy" path="res://Assets/Coin/DragonCoin_6.png" id="7_d77p3"]
+[ext_resource type="Texture2D" uid="uid://pr0bf8sj1ddh" path="res://Assets/Coin/DragonCoin_7.png" id="8_fey5b"]
+[ext_resource type="Texture2D" uid="uid://bysnho52v7mnw" path="res://Assets/Coin/DragonCoin_8.png" id="9_ukplk"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_6cd6f"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_ph0i5")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_n7qyb")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_vsy6q")
+}, {
+"duration": 1.0,
+"texture": ExtResource("5_sepau")
+}, {
+"duration": 1.0,
+"texture": ExtResource("6_phxl4")
+}, {
+"duration": 1.0,
+"texture": ExtResource("7_d77p3")
+}, {
+"duration": 1.0,
+"texture": ExtResource("8_fey5b")
+}, {
+"duration": 1.0,
+"texture": ExtResource("9_ukplk")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_ge7bi"]
+radius = 7.0
+height = 16.0
+
+[node name="DragonCoin" type="Node2D" groups=["coin"]]
+script = ExtResource("1_md360")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+scale = Vector2(0.6, 0.6)
+sprite_frames = SubResource("SpriteFrames_6cd6f")
+frame_progress = 0.124089
+
+[node name="Area2D" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+shape = SubResource("CapsuleShape2D_ge7bi")
+
+[connection signal="area_entered" from="Area2D" to="." method="_on_area_2d_area_entered"]
