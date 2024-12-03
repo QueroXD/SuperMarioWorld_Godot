@@ -6,7 +6,6 @@ extends CharacterBody2D
 @onready var timer = $TimerDelete  # Asumimos que tienes un nodo Timer dentro del cohete
 
 var on_screen: bool = false
-var alive: bool = true
 var delete: bool = false
 
 # Señales
@@ -33,7 +32,7 @@ func _on_timer_timeout():
 		queue_free() 
 
 func _physics_process(delta):
-	if on_screen == true && alive == true:
+	if on_screen == true && Global.alive == true:
 		move_rocket(delta)
 		
 func move_rocket(delta):
@@ -54,7 +53,6 @@ func _on_interaction_points_area_entered(area: Area2D) -> void:
 		queue_free()
 
 func died():
-	alive = false
 	timer.stop()  # Inicia el temporizador
 	emit_signal("player_died_other")  # Envía la señal al jugador
 

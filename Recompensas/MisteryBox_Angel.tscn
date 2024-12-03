@@ -1,0 +1,68 @@
+[gd_scene load_steps=10 format=3 uid="uid://b23vxg4ea4bug"]
+
+[ext_resource type="Script" path="res://Recompensas/mistery_box_angel.gd" id="1_b5oxj"]
+[ext_resource type="Texture2D" uid="uid://cq4n0054otd3v" path="res://Assets/tiles.png" id="2_ia231"]
+[ext_resource type="Texture2D" uid="uid://d4lkhdvmqocke" path="res://Assets/objects-animated-Photoroom.png" id="3_ydt3x"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_d2yd8"]
+atlas = ExtResource("2_ia231")
+region = Rect2(0, 51, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_bexea"]
+atlas = ExtResource("3_ydt3x")
+region = Rect2(404, 430, 22, 27)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_2ypfy"]
+atlas = ExtResource("3_ydt3x")
+region = Rect2(368, 430, 33, 27)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_buj0r"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_d2yd8")
+}],
+"loop": true,
+"name": &"NoReward",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_bexea")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_2ypfy")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ag7jn"]
+size = Vector2(17, 17)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_bvr6k"]
+size = Vector2(19, 17)
+
+[node name="MisteryBoxAngel" type="CharacterBody2D"]
+script = ExtResource("1_b5oxj")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+scale = Vector2(1.17647, 1.17647)
+sprite_frames = SubResource("SpriteFrames_buj0r")
+
+[node name="Area2D" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+position = Vector2(0, 5)
+shape = SubResource("RectangleShape2D_ag7jn")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, 4)
+shape = SubResource("RectangleShape2D_bvr6k")
+
+[node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="."]
+position = Vector2(0, 5)
+scale = Vector2(8.15, 0.3)
+
+[connection signal="area_entered" from="Area2D" to="." method="_on_area_2d_area_entered"]

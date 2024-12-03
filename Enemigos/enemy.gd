@@ -1,14 +1,19 @@
-extends Node2D
+extends CharacterBody2D
 
 # Variables para movimiento y comportamiento
 @export var speed: float = 25.0
 @export var direction: Vector2 = Vector2.LEFT
+const GRAVITY: float = 500.0  # Fuerza de gravedad (puedes ajustar este valor según lo necesites)
+const MAX_FALL_SPEED: float = 300.0  # Velocidad máxima de caída
+
 var on_screen: bool = false
-var standit: bool = false
-var move: bool = false
-var alive: bool = true
+var standit: bool = false # Koopa sentado
+var move: bool = false # Mover Koopa
 var petit: bool = false
 var petitx2: bool = false
+var moveKo: bool = false # Mover Koopa
+var stopKo: bool = false # Parar Koopa una vez sentado y en movimiento
+var GladTime: bool = false # Tiempo de gracia Koopa sentado
 
 # Referencias a nodos hijos
 @onready var animated_sprite = $AnimatedSprite2D
@@ -18,7 +23,7 @@ var petitx2: bool = false
 
 # Señales
 signal player_died
-
+signal player_down
 
 func _ready():
 	# Inicia animaciones y temporizadores si es necesario
@@ -42,12 +47,28 @@ func _on_screen_exited():
 	timer.stop()  # Inicia el temporizador
 
 func _physics_process(delta):
-	if on_screen && (standit == false || move == true) && alive == true:
+	if on_screen && (standit == false || move == true) && Global.alive == true:
 		move_enemy(delta)
 
 func move_enemy(delta):
 	# Mueve al Gompa
-	position += direction * speed * delta
+	if name.contains("Koopa") && animated_sprite.animation == "stand":
+		if stopKo == false && move == true:
+			# Aplicar gravedad si no está en el suelo
+			if not is_on_floor():
+				velocity.y += GRAVITY * delta
+				velocity.y = clamp(velocity.y, -MAX_FALL_SPEED, MAX_FALL_SPEED)  # Limitar velocidad de caída
+			else:
+				# Reiniciar la velocidad vertical al estar en el suelo
+				velocity.y = 0
+
+			# Movimiento horizontal
+			velocity.x = direction.x * speed
+			moveKo = true
+			# Mover el enemigo teniendo en cuenta las colisiones
+			move_and_slide()
+	else:
+		position += direction * speed * delta
 	
 func _on_timer_timeout():
 	if (standit == false):
@@ -75,25 +96,35 @@ func _on_timer_timeout():
 		timer.start()
 
 func _on_interaction_points_area_entered(area: Area2D) -> void:
-	if (area.name == "Mario" && alive == true ):
+	if (area.name == "Mario" && Global.alive == true ):
 		var player_position = area.global_position	
 		if name.contains("Koopa"):  # Basado en el nombre del nodo
-			if player_position.y > 587 && player_position.y < 589:
-				if standit == false:
+			print(player_position.y)
+			if ((player_position.y > 586 && player_position.y < 590) || (player_position.y > 652 && player_position.y < 655)):
+				if standit == false && moveKo == false:
 					animated_sprite.play("stand")
-					timer.stop()  # Inicia el temporizador
+					timer.stop()
 					standit = true;
-				else:
+					GladTime = true
+					#$InteractionPoints/CollisionShape2D.queue_free()
+					$CollisionShape2D.queue_free()
+				elif standit == true && moveKo == true && stopKo == false:
+					stopKo = true
+					move = false
+				elif GladTime == false:
+					print("Eliminarrrr")
 					queue_free()  # Elimina al enemigo
 			else:
-				if standit == true:
+				if standit == true && move == false:
+					stopKo = false
 					move = true
 					if (Input.get_action_strength("ui_right")):
 						direction = Vector2.RIGHT
 					elif (Input.get_action_strength("ui_left")):
 						direction = Vector2.LEFT
 					speed = 75.00
-				else:
+				elif standit == true && move == true:
+					#if direction == Vector2.RIGHT && 
 					died()
 					print("Jugador muerto")
 		elif name.contains("Gomba"):  # Basado en el nombre del nodo
@@ -134,7 +165,14 @@ func _on_interaction_points_area_entered(area: Area2D) -> void:
 			print("Jugador muerto")
 
 func died():
-	alive = false
-	animated_sprite.stop()
-	timer.stop()  # Inicia el temporizador
-	emit_signal("player_died")  # Envía la señal al jugador
+	if Global.alive2 == false:
+		Global.alive = false
+		animated_sprite.stop()
+		timer.stop()
+		emit_signal("player_died")  # Envía la señal al jugador
+	elif Global.alive2 == true:
+		emit_signal("player_down")
+
+
+func _on_interaction_points_area_exited(area: Area2D) -> void:
+	GladTime = false

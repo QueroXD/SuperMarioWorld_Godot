@@ -13,26 +13,22 @@ const MAX_FALL_SPEED = 900.0
 @onready var TimerSprite = $TimerSprite
 @onready var TimeDead = $TimeDead
 @onready var TimerPause = $TimerPause
+@onready var GladTime = $GladTime
+
 var originaJumpDirection = 0
 var originalDuckDirection = 0
 var lastMoveDirection = 0
 var input_direction = 0
 var JUMPED_DUCK = false
-var alive = true
 var cambio = false
 var paused = false
 var CoinContador = 0
-
 
 
 func _ready():
 	animated_sprite.animation = "idle_right"
 	animated_sprite.play()
 	TimerSprite.connect("timeout", Callable(self, "gestorIdle"))  # Conecta la señal del temporizador
-
-#	Señal recibida del script de enemy.gd
-	for enemy in get_tree().get_nodes_in_group("enemy"):
-		enemy.connect("player_died", Callable(self, "_on_player_died"))
 
 #	Señal recibida del script coin.gd
 	for coin in get_tree().get_nodes_in_group("coin"):
@@ -42,28 +38,52 @@ func _on_coin_obteined():
 	CoinContador = CoinContador + 1
 	print(CoinContador)
 
+func _on_player_degree():
+	TimerPause.wait_time = 0.18
+	TimerPause.connect("timeout", Callable(self, "pause"))
+	GladTime.start()
+	GladTime.connect("timeout", Callable(self, "gestionarMuerte"))  # Conecta la señal del temporizador
+
+
 func _on_player_died():
 	# Mario muerte
-	alive = false
-	animated_sprite.play("die")
-	TimeDead.connect("timeout", Callable(self, "gestionarMuerte"))  # Conecta la señal del temporizador
+	if Global.alive2 == true:
+		Global.alive2 = false
+	elif Global.alive2 == false:
+		Global.alive = false
+		TimerPause.start()
+		TimerPause.wait_time = 2
+		animated_sprite.play("die")
+		TimeDead.connect("timeout", Callable(self, "gestionarMuerte"))  # Conecta la señal del temporizador
 
 func gestionarMuerte():
-	if (position.y <= 600.00):
-		cambio = true
-		TimerPause.connect("timeout", Callable(self, "pause"))
-		
+	if Global.alive2 == true:
+		Global.alive2 = false
+		TimerPause.stop()
+		animated_sprite.visible = true
 
-	if (cambio == false):
-		position.y -= 3
-	elif (cambio == true && paused == true):
-		position.y += 3
+	elif Global.alive == false:
+		if (position.y <= 600.00):
+			cambio = true
+			TimerPause.connect("timeout", Callable(self, "pause"))
+			
+		if (cambio == false):
+			position.y -= 3
+		elif (cambio == true && paused == true):
+			position.y += 3
 
 func _physics_process(delta):
-	if not alive:
+	if not Global.alive:
 		# Detener el movimiento y la gravedad
 		velocity = Vector2.ZERO  # Detiene el movimiento completamente
 		return
+		
+#	Señal recibida del script de enemy.gd
+	for enemy in get_tree().get_nodes_in_group("enemy"):
+		if Global.alive2 == true:
+			enemy.connect("player_down", Callable(self, "_on_player_degree"))
+		elif Global.alive2 == false:
+			enemy.connect("player_died", Callable(self, "_on_player_died"))
 		
 	# Gravedad
 	if not is_on_floor():
@@ -85,11 +105,10 @@ func _physics_process(delta):
 	velocity.y = clamp(velocity.y, -INF, MAX_FALL_SPEED)
 
 	 #Animaciones
-	if (Input.is_action_pressed("ui_down") and alive == true): # Agachado
+	if (Input.is_action_pressed("ui_down") and Global.alive == true): # Agachado
 		velocity.x = input_direction * MOVE_DUCK_SPEED
 		_activate_duck_collision()
 		if (Input.is_action_pressed("ui_up") and JUMPED_DUCK == false):
-			#animated_sprite.animation = "duck_right" if (input_direction > 0) else "duck_left"
 			velocity.y = JUMP_DUCK
 			if (input_direction > 0):
 				animated_sprite.animation = "duck_right"
@@ -105,14 +124,14 @@ func _physics_process(delta):
 			else:
 				animated_sprite.animation = "duck_left"
 			animated_sprite.play()
-	elif not is_on_floor() && alive == true:  # En el aire
+	elif not is_on_floor() && Global.alive == true:  # En el aire
 		if (input_direction >= 0 and lastMoveDirection != -1):
 			animated_sprite.animation = "jump_right"
 		else:
 			animated_sprite.animation = "jump_left"
 		animated_sprite.play()
 		
-	elif input_direction != 0 && alive == true:
+	elif input_direction != 0 && Global.alive == true:
 		# Movimiento horizontal
 		if input_direction > 0: # Derecha
 			animated_sprite.animation = "walk_right"
@@ -127,7 +146,7 @@ func _physics_process(delta):
 	move_and_slide()
 	
 func gestorIdle():
-	if (alive == true and (not Input.is_action_pressed("ui_down")) and (not Input.is_action_pressed("ui_up")) and (not Input.is_action_pressed("ui_right")) and ( not Input.is_action_pressed("ui_left"))):
+	if (Global.alive == true and (not Input.is_action_pressed("ui_down")) and (not Input.is_action_pressed("ui_up")) and (not Input.is_action_pressed("ui_right")) and ( not Input.is_action_pressed("ui_left"))):
 		#animated_sprite.animation = "idle_left" if (input_direction < 0) else "idle_right"
 		if (input_direction < 0 or lastMoveDirection == -1):
 			animated_sprite.animation = "idle_left"
@@ -151,5 +170,11 @@ func _activate_standing_collision():
 	$Mario/CollisionShape2D.set_disabled(false)
 	
 func pause():
-	paused = true
-	
+	if Global.alive2 == true:
+		if animated_sprite.visible == false:
+			animated_sprite.visible = true
+		elif animated_sprite.visible == true:
+			animated_sprite.visible = false
+	elif Global.alive == false:
+		paused = true
+		TimerPause.stop()

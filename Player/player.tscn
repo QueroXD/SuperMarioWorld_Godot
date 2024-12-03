@@ -263,7 +263,7 @@ wait_time = 0.2
 autostart = true
 
 [node name="TimeDead" type="Timer" parent="."]
-wait_time = 0.01
+wait_time = 0.06
 autostart = true
 
 [node name="CollisionShape2D_duck" type="CollisionShape2D" parent="."]
@@ -271,7 +271,10 @@ position = Vector2(2, 12)
 shape = SubResource("RectangleShape2D_t71vt")
 
 [node name="TimerPause" type="Timer" parent="."]
-wait_time = 4.0
+wait_time = 2.0
 autostart = true
+
+[node name="GladTime" type="Timer" parent="."]
+wait_time = 4.0
 
 [connection signal="area_entered" from="Mario" to="." method="_on_mario_area_entered"]

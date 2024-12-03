@@ -1,0 +1,30 @@
+[gd_scene load_steps=5 format=3 uid="uid://cc370e54ewrxw"]
+
+[ext_resource type="Script" path="res://Recompensas/champi.gd" id="1_uvrfd"]
+[ext_resource type="Texture2D" uid="uid://bd5ssxps2qsbo" path="res://Assets/champi.png" id="2_alnh5"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_m4343"]
+size = Vector2(14, 14)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_4slw8"]
+size = Vector2(12, 12)
+
+[node name="Champi" type="CharacterBody2D"]
+script = ExtResource("1_uvrfd")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(0, -2)
+scale = Vector2(0.032, 0.032)
+texture = ExtResource("2_alnh5")
+
+[node name="InteractionPoints" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="InteractionPoints"]
+position = Vector2(0, -2)
+shape = SubResource("RectangleShape2D_m4343")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, -2)
+shape = SubResource("RectangleShape2D_4slw8")
+
+[connection signal="area_entered" from="InteractionPoints" to="." method="_on_interaction_points_area_entered"]
