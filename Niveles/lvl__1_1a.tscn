@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=4 uid="uid://ctcyy1cdrewyr"]
+[gd_scene load_steps=12 format=4 uid="uid://ctcyy1cdrewyr"]
 
 [ext_resource type="Texture2D" uid="uid://b8ia4ny15hns7" path="res://Assets/bg2.png" id="1_xjsvt"]
 [ext_resource type="TileSet" uid="uid://bwhtlgm7x7ehu" path="res://Assets/Lvl1.tres" id="2_vlp8o"]
@@ -10,6 +10,7 @@
 [ext_resource type="PackedScene" uid="uid://japy27d606u4" path="res://Recompensas/coin.tscn" id="8_8i2j1"]
 [ext_resource type="PackedScene" uid="uid://d2aehkg1su3uv" path="res://Enemigos/Piranha Plant.tscn" id="9_psy5m"]
 [ext_resource type="PackedScene" uid="uid://bm307efsgikg8" path="res://Recompensas/MisteryBox.tscn" id="10_7tsw3"]
+[ext_resource type="PackedScene" uid="uid://b23vxg4ea4bug" path="res://Recompensas/MisteryBox_Angel.tscn" id="11_toj7n"]
 
 [node name="lvl _1-1a" type="Node2D"]
 
@@ -188,3 +189,6 @@ position = Vector2(505, 616)
 
 [node name="MysteriBox" parent="." instance=ExtResource("10_7tsw3")]
 position = Vector2(59, 611)
+
+[node name="MisteryBoxAngel" parent="." instance=ExtResource("11_toj7n")]
+position = Vector2(1100, 563)
