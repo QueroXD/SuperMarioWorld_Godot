@@ -55,6 +55,7 @@ label_settings = SubResource("LabelSettings_0erkd")
 horizontal_alignment = 1
 
 [node name="timeNum" type="Label" parent="CanvasLayer/time"]
+layout_mode = 0
 offset_left = 2.0
 offset_top = 26.0
 offset_right = 118.0
@@ -81,6 +82,7 @@ texture = ExtResource("3_7cwyt")
 stretch_mode = 4
 
 [node name="x" type="TextureRect" parent="CanvasLayer/x"]
+layout_mode = 0
 offset_left = 229.0
 offset_top = -1.0
 offset_right = 251.0
@@ -88,7 +90,7 @@ offset_bottom = 21.0
 texture = ExtResource("3_7cwyt")
 stretch_mode = 4
 
-[node name="TextureRect" type="TextureRect" parent="CanvasLayer/x"]
+[node name="Estrella" type="TextureRect" parent="CanvasLayer/x"]
 layout_mode = 0
 offset_left = 201.0
 offset_top = -1.0
