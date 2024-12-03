@@ -9,6 +9,7 @@ const JUMP_FORCE = -500.0
 const MAX_FALL_SPEED = 900.0
 
 @onready var animated_sprite = $AnimatedSprite2D
+@onready var animated_sprite2 = $AnimatedSprite2D
 @onready var collision = $CollisionShape2D
 @onready var TimerSprite = $TimerSprite
 @onready var TimeDead = $TimeDead
@@ -55,6 +56,7 @@ func _on_player_died():
 		TimerPause.wait_time = 2
 		animated_sprite.play("die")
 		TimeDead.connect("timeout", Callable(self, "gestionarMuerte"))  # Conecta la señal del temporizador
+		load_game_over_scene()
 
 func gestionarMuerte():
 	if Global.alive2 == true:
@@ -73,6 +75,11 @@ func gestionarMuerte():
 			position.y += 3
 
 func _physics_process(delta):
+
+	if position.y >= 750:
+		Global.alive2 == false
+		_on_player_died()
+		
 	if not Global.alive:
 		# Detener el movimiento y la gravedad
 		velocity = Vector2.ZERO  # Detiene el movimiento completamente
@@ -144,7 +151,7 @@ func _physics_process(delta):
 		
 	# Movimiento
 	move_and_slide()
-	
+
 func gestorIdle():
 	if (Global.alive == true and (not Input.is_action_pressed("ui_down")) and (not Input.is_action_pressed("ui_up")) and (not Input.is_action_pressed("ui_right")) and ( not Input.is_action_pressed("ui_left"))):
 		#animated_sprite.animation = "idle_left" if (input_direction < 0) else "idle_right"
@@ -178,3 +185,16 @@ func pause():
 	elif Global.alive == false:
 		paused = true
 		TimerPause.stop()
+
+func load_game_over_scene():
+	var scene_resource = load("res://Player/game_over.tscn")
+
+	var game_over_scene = scene_resource.instantiate()
+	get_tree().root.add_child(game_over_scene)
+
+	# Asegúrate de iniciar la animación y de que los TextureRect estén visibles
+	var animation_player = game_over_scene.get_node("AnimationPlayer")
+	if animation_player:
+		animation_player.play("GameOver")
+	else:
+		print("Error: AnimationPlayer no encontrado en game_over.tscn")

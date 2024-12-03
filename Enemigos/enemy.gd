@@ -98,9 +98,8 @@ func _on_timer_timeout():
 func _on_interaction_points_area_entered(area: Area2D) -> void:
 	if (area.name == "Mario" && Global.alive == true ):
 		var player_position = area.global_position	
-		if name.contains("Koopa"):  # Basado en el nombre del nodo
-			print(player_position.y)
-			if ((player_position.y > 586 && player_position.y < 590) || (player_position.y > 652 && player_position.y < 655)):
+		if name.contains("Koopa"):  # Basado en el nombre del nodos
+			if ((player_position.y > 586 && player_position.y < 590) || (player_position.y > 639 && player_position.y < 665)):
 				if standit == false && moveKo == false:
 					animated_sprite.play("stand")
 					timer.stop()
@@ -112,7 +111,6 @@ func _on_interaction_points_area_entered(area: Area2D) -> void:
 					stopKo = true
 					move = false
 				elif GladTime == false:
-					print("Eliminarrrr")
 					queue_free()  # Elimina al enemigo
 			else:
 				if standit == true && move == false:
@@ -125,7 +123,7 @@ func _on_interaction_points_area_entered(area: Area2D) -> void:
 					speed = 75.00
 				elif standit == true && move == true:
 					#if direction == Vector2.RIGHT && 
-					died()
+					#died()
 					print("Jugador muerto")
 		elif name.contains("Gomba"):  # Basado en el nombre del nodo
 			# Comprueba si el jugador está cayendo desde arriba

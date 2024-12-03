@@ -53,13 +53,16 @@ func _on_interaction_points_area_entered(area: Area2D) -> void:
 		queue_free()
 
 func died():
+	$InteractionPoints.queue_free()
+	$InteractionPoints/CollisionShape2D.queue_free()
+	$CollisionShape2D.queue_free()
 	timer.stop()  # Inicia el temporizador
 	emit_signal("player_died_other")  # Envía la señal al jugador
 
 func rocket_died():
 	timer.start(0.05)
 	delete = true
-	$InteractionPoints.queue_free
-	$InteractionPoints/CollisionShape2D.queue_free
+	$InteractionPoints.queue_free()
+	$InteractionPoints/CollisionShape2D.queue_free()
 	$CollisionShape2D.queue_free()
 	timer.connect("timeout", Callable(self, "_on_timer_timeout"))

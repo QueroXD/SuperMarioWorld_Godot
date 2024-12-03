@@ -1,4 +1,4 @@
-[gd_scene load_steps=29 format=3 uid="uid://cuonlfduijsbo"]
+[gd_scene load_steps=25 format=3 uid="uid://cuonlfduijsbo"]
 
 [ext_resource type="Texture2D" uid="uid://brlrwo02orld3" path="res://Assets/Mario Animacion.png" id="1_7n7hb"]
 [ext_resource type="Script" path="res://Player/player.gd" id="1_wqxug"]
@@ -21,14 +21,6 @@ region = Rect2(487, 0, 37, 65)
 atlas = ExtResource("1_7n7hb")
 region = Rect2(375, 0, 37, 65)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_tjjus"]
-atlas = ExtResource("1_7n7hb")
-region = Rect2(189, 0, 37, 65)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_isjch"]
-atlas = ExtResource("1_7n7hb")
-region = Rect2(782, 0, 37, 65)
-
 [sub_resource type="AtlasTexture" id="AtlasTexture_qaqce"]
 atlas = ExtResource("2_lyvn8")
 region = Rect2(858, 10, 38, 48)
@@ -44,14 +36,6 @@ region = Rect2(710, 0, 37, 65)
 [sub_resource type="AtlasTexture" id="AtlasTexture_ja2to"]
 atlas = ExtResource("1_7n7hb")
 region = Rect2(152, 0, 37, 65)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_fei7b"]
-atlas = ExtResource("1_7n7hb")
-region = Rect2(338, 0, 37, 65)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_1bdn1"]
-atlas = ExtResource("2_lyvn8")
-region = Rect2(525, 10, 38, 48)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_yh3qq"]
 atlas = ExtResource("1_7n7hb")
@@ -120,22 +104,6 @@ animations = [{
 }, {
 "frames": [{
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_tjjus")
-}],
-"loop": true,
-"name": &"fail",
-"speed": 5.0
-}, {
-"frames": [{
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_isjch")
-}],
-"loop": true,
-"name": &"fly",
-"speed": 5.0
-}, {
-"frames": [{
-"duration": 1.0,
 "texture": SubResource("AtlasTexture_qaqce")
 }],
 "loop": true,
@@ -164,17 +132,6 @@ animations = [{
 }],
 "loop": true,
 "name": &"jump_right",
-"speed": 5.0
-}, {
-"frames": [{
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_fei7b")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_1bdn1")
-}],
-"loop": true,
-"name": &"look up",
 "speed": 5.0
 }, {
 "frames": [{
@@ -232,15 +189,14 @@ animations = [{
 size = Vector2(35, 45)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_t71vt"]
-size = Vector2(28, 26)
+size = Vector2(28, 27)
 
 [node name="Player" type="CharacterBody2D"]
 script = ExtResource("1_wqxug")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
-position = Vector2(0, 1)
 sprite_frames = SubResource("SpriteFrames_1ybyp")
-animation = &"fail"
+animation = &"walk_left"
 
 [node name="Mario" type="Area2D" parent="."]
 

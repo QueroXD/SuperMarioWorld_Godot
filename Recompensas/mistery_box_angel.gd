@@ -2,8 +2,8 @@ extends CharacterBody2D
 
 
 const SPEED = 25.0
-const AMPLITUDE = 75.0
-const FREQUENCY = 3.0 
+const AMPLITUDE = 35.0
+const FREQUENCY = 2.5 
 
 @onready var champi_scene: PackedScene = preload("res://Recompensas/Champi.tscn")
 
