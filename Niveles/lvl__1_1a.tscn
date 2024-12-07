@@ -1,14 +1,15 @@
-[gd_scene load_steps=10 format=4 uid="uid://ctcyy1cdrewyr"]
+[gd_scene load_steps=11 format=4 uid="uid://ctcyy1cdrewyr"]
 
 [ext_resource type="Texture2D" uid="uid://b8ia4ny15hns7" path="res://Assets/bg2.png" id="1_xjsvt"]
 [ext_resource type="TileSet" uid="uid://bwhtlgm7x7ehu" path="res://Assets/Lvl1.tres" id="2_vlp8o"]
 [ext_resource type="PackedScene" uid="uid://c78pvqnr20n4j" path="res://Enemigos/Gomba.tscn" id="3_ifxbu"]
-[ext_resource type="PackedScene" uid="uid://daioum7catqmr" path="res://Recompensas/DragonCoin.tscn" id="4_1851l"]
+[ext_resource type="PackedScene" path="res://Recompensas/DragonCoin.tscn" id="4_1851l"]
 [ext_resource type="PackedScene" uid="uid://bjgcs6wl6wlmd" path="res://Enemigos/Koopa.tscn" id="4_q5qto"]
 [ext_resource type="PackedScene" uid="uid://dsaolxwt3a47n" path="res://Enemigos/Ankylosaurus.tscn" id="5_kd7fc"]
 [ext_resource type="PackedScene" uid="uid://di3ku2bbe1vyi" path="res://Enemigos/rocket.tscn" id="6_e7sbe"]
 [ext_resource type="PackedScene" uid="uid://cvda2apmghbg4" path="res://Enemigos/koopa_otaku.tscn" id="7_jyi58"]
 [ext_resource type="PackedScene" uid="uid://japy27d606u4" path="res://Recompensas/coin.tscn" id="8_8i2j1"]
+[ext_resource type="PackedScene" uid="uid://bm307efsgikg8" path="res://Recompensas/MisteryBox.tscn" id="10_8k6dw"]
 
 [node name="lvl _1-1a" type="Node2D"]
 
@@ -178,6 +179,9 @@ scale = Vector2(1.5, 1.5)
 [node name="DragonCoin4" parent="Monedas" instance=ExtResource("4_1851l")]
 position = Vector2(5917, 598)
 scale = Vector2(1.5, 1.5)
+
+[node name="MisteryBox" parent="Monedas" instance=ExtResource("10_8k6dw")]
+position = Vector2(64, 594)
 
 [node name="Enemigos" type="Node2D" parent="."]
 

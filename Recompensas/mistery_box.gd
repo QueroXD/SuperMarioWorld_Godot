@@ -9,16 +9,16 @@ func _ready():
 
 func _on_area_2d_area_entered(area: Area2D) -> void:
 	if area.name == "Mario":
-		if name.contains("MysteriBox"):
+		print(name)
+		if name.contains("MisteryBox"):
 			if animation_sprite.animation != "NoReward":
 				InvokeReward()
 			animation_sprite.play("NoReward")
-			
 
 func InvokeReward():
 	# Crear un nuevo cohete
 	var champi = champi_scene.instantiate()
-	get_tree().root.add_child(champi)  # Agregar el cohete a la escena principal (o donde corresponda)
+	get_tree().root.add_child(champi)
 	
 # Posicionar el champi justo encima
 	champi.global_position.x = global_position.x

@@ -127,7 +127,7 @@ func _on_interaction_points_area_entered(area: Area2D) -> void:
 					print("Jugador muerto")
 		elif name.contains("Gomba"):  # Basado en el nombre del nodo
 			# Comprueba si el jugador está cayendo desde arriba
-			if player_position.y > 661 && player_position.y < 663:
+			if player_position.y > 659 && player_position.y < 665:
 				queue_free()  # Elimina al enemigo
 			else:
 				died()
