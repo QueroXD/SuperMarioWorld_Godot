@@ -189,6 +189,9 @@ func _physics_process(delta):
 		animated_sprite.play()
 		_activate_standing_collision()  # Activar colisiones de pie
 		
+	if (position.x > 2434 && position.x < 2461 && (Input.is_action_pressed("ui_down") and Global.alive == true)):
+		# TP al subnivel
+		pass
 	# Movimiento
 	move_and_slide()
 
