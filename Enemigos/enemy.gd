@@ -135,7 +135,7 @@ func _on_interaction_points_area_entered(area: Area2D) -> void:
 		elif name.contains("Ankylosaurus"):
 			print(player_position.y)
 			print(petitx2)
-			if player_position.y > 646 && player_position.y < 648:
+			if player_position.y > 644 && player_position.y < 648:
 				petit = true
 				$InteractionPoints/CollisionShape2D_Mayor.queue_free()
 				$CollisionShape2D_Mayor.queue_free()

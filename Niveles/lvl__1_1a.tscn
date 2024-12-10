@@ -201,4 +201,5 @@ position = Vector2(4198, 642)
 position = Vector2(390, 543)
 
 [node name="Ankylosaurus2" parent="Enemigos" instance=ExtResource("5_kd7fc")]
+visible = false
 position = Vector2(3910, 656)

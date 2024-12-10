@@ -16,6 +16,11 @@ const MAX_FALL_SPEED = 900.0
 @onready var TimerPause = $TimerPause
 @onready var GladTime = $GladTime
 
+var subnivel = load("res://Niveles/lvl__1_1b.tscn")
+#var subnivel_path = "res://Niveles/lvl__1_1b.tscn"
+#var nivelAlpha = preload("res://Niveles/lvl__1_1a.tscn")
+
+
 var originaJumpDirection = 0
 var originalDuckDirection = 0
 var lastMoveDirection = 0
@@ -24,13 +29,13 @@ var JUMPED_DUCK = false
 var cambio = false
 var paused = false
 var CoinContador = 0
+var CambioScena = false
 
 
 func _ready():
-	animated_sprite.animation = "idle_right"
-	animated_sprite.play()
+	animated_sprite.play("idle_right")
 	TimerSprite.connect("timeout", Callable(self, "gestorIdle"))  # Conecta la señal del temporizador
-
+	
 	# Desactivar UP
 	$Mario/CollisionShape2D_UP.set_disabled(true)
 	$CollisionShape2D_UP.set_disabled(true)
@@ -81,10 +86,9 @@ func gestionarMuerte():
 			position.y += 3
 
 func _physics_process(delta):
-	if position.y >= 750:
+	if position.y >= 750 && Global.tuberia == false:
 		Global.alive2 == false
 		_on_player_died()
-	print(position.x)
 	if not Global.alive:
 		# Detener el movimiento y la gravedad
 		velocity = Vector2.ZERO  # Detiene el movimiento completamente
@@ -131,67 +135,79 @@ func _physics_process(delta):
 	if (Input.is_action_pressed("ui_down") and Global.alive == true): # Agachado
 		velocity.x = input_direction * MOVE_DUCK_SPEED
 		_activate_duck_collision()
+		print(position.x)
+		print(position.y)
 		if (Input.is_action_pressed("ui_up") and JUMPED_DUCK == false):
 			velocity.y = JUMP_DUCK
 			if (input_direction > 0):
 				if Global.alive2 == true:
-					animated_sprite2.animation = "duck_right_up"
+					animated_sprite2.play("duck_right_up")
 				else:
-					animated_sprite.animation = "duck_right"
+					animated_sprite.play("duck_right")
 				originalDuckDirection = 1
 			elif (input_direction < 0):
 				if Global.alive2 == true:
-					animated_sprite2.animation = "duck_left_up"
+					animated_sprite2.play("duck_left_up")
 				else:
-					animated_sprite.animation = "duck_left"
+					animated_sprite.play("duck_left")
 				originalDuckDirection = -1
 			JUMPED_DUCK = true
-			animated_sprite.play()
 		else:
 			if ((input_direction >= 0) and (lastMoveDirection != -1)):
 				if Global.alive2 == true:
-					animated_sprite2.animation = "duck_right_up"
+					animated_sprite2.play("duck_right_up")
 				else:
-					animated_sprite.animation = "duck_right"
+					animated_sprite.play("duck_right")
 			else:
 				if Global.alive2 == true:
-					animated_sprite2.animation = "duck_left_up"
+					animated_sprite2.play("duck_left_up")
 				else:
-					animated_sprite.animation = "duck_left"
-			animated_sprite.play()
+					animated_sprite.play("duck_left")
+
 	elif not is_on_floor() && Global.alive == true:  # En el aire
 		if (input_direction >= 0 and lastMoveDirection != -1):
 			if Global.alive2 == true:
-				animated_sprite2.animation = "jump_right_up"
+				animated_sprite2.play("jump_right_up")
 			else:
-				animated_sprite.animation = "jump_right"
+				animated_sprite.play("jump_right")
 		else:
 			if Global.alive2 == true:
-				animated_sprite2.animation = "jump_left_up"
+				animated_sprite2.play("jump_left_up")
 			else:
-				animated_sprite.animation = "jump_left"
-		animated_sprite.play()
+				animated_sprite.play("jump_left")
 		
 	elif input_direction != 0 && Global.alive == true:
 		# Movimiento horizontal
 		if input_direction > 0: # Derecha
 			if Global.alive2 == true:
-				animated_sprite2.animation = "walk_right_up"
+				animated_sprite2.play("walk_right_up")
 			else:
-				animated_sprite.animation = "walk_right"
+				animated_sprite.play("walk_right")
 			lastMoveDirection = 1
 		elif input_direction < 0: # Izquierda
 			if Global.alive2 == true:
-				animated_sprite2.animation = "walk_left_up"
+				animated_sprite2.play("walk_left_up")
 			else:
-				animated_sprite.animation = "walk_left"
+				animated_sprite.play("walk_left")
 			lastMoveDirection = -1
-		animated_sprite.play()
 		_activate_standing_collision()  # Activar colisiones de pie
 		
-	if (position.x > 2434 && position.x < 2461 && (Input.is_action_pressed("ui_down") and Global.alive == true)):
-		# TP al subnivel
-		pass
+	if (position.x > 2434 && position.x < 2461 && (Input.is_action_pressed("ui_down") and Global.alive == true) && position.y <= 647 && position.y > 644 ):
+		#get_tree().change_scene_to_file("res://Niveles/lvl__1_1b.tscn")
+		#get_tree().change_scene_to_packed(subnivel)
+		Global.tuberia = true
+		position.x = 2450
+		position.y = 910
+		
+	#if (position.x > 2981 && position.x < 2484 && (Input.is_action_pressed("ui_right") and Global.alive == true) && position.y < 942 && position.y > 938 && Global.tuberia == true):
+	if (position.x > 2983 && Global.tuberia == true && Global.alive == true && Input.is_action_pressed("ui_right") && position.y > 938 && position.y < 940):
+		Global.tuberia = false
+		#get_tree().change_scene_to_packed(nivelAlpha)
+		position.x = 2615
+		position.y = 600
+		#Respawn al eje x = 2615
+		#Respawn al eje y = 600
+		
 	# Movimiento
 	move_and_slide()
 
@@ -199,16 +215,14 @@ func gestorIdle():
 	if (Global.alive == true and (not Input.is_action_pressed("ui_down")) and (not Input.is_action_pressed("ui_up")) and (not Input.is_action_pressed("ui_right")) and ( not Input.is_action_pressed("ui_left"))):
 		if (input_direction < 0 or lastMoveDirection == -1):
 			if Global.alive2 == true:
-				animated_sprite2.animation = "idle_left_up"
+				animated_sprite2.play("idle_left_up")
 			else:
-				animated_sprite.animation = "idle_left"
+				animated_sprite.play("idle_left")
 		else:
 			if Global.alive2 == true:
-				animated_sprite2.animation = "idle_right_up"
+				animated_sprite2.play("idle_right_up")
 			else:
-				animated_sprite.animation = "idle_right"
-		animated_sprite.play()
-		
+				animated_sprite.play("idle_right")
 	# Reinicia el temporizador
 	TimerSprite.start()
 
