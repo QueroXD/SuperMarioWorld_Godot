@@ -16,6 +16,12 @@ const MAX_FALL_SPEED = 900.0
 @onready var TimerPause = $TimerPause
 @onready var GladTime = $GladTime
 
+@onready var overworldMusic = $OverWorld
+@onready var undergroundMusic = $Underground
+@onready var jumpSound = $Jump
+@onready var mushroomSound = $Champi
+@onready var pipeDamageSound = $PipeDamage
+
 var subnivel = load("res://Niveles/lvl__1_1b.tscn")
 #var subnivel_path = "res://Niveles/lvl__1_1b.tscn"
 #var nivelAlpha = preload("res://Niveles/lvl__1_1a.tscn")
@@ -33,6 +39,8 @@ var CambioScena = false
 
 
 func _ready():
+	overworldMusic.play(0.0)
+	
 	animated_sprite.play("idle_right")
 	TimerSprite.connect("timeout", Callable(self, "gestorIdle"))  # Conecta la señal del temporizador
 	
@@ -50,6 +58,7 @@ func _on_coin_obteined():
 	print(CoinContador)
 
 func _on_player_degree():
+	pipeDamageSound.play(0.0)	
 	TimerPause.wait_time = 0.18
 	TimerPause.connect("timeout", Callable(self, "pause"))
 	GladTime.start()
@@ -57,6 +66,7 @@ func _on_player_degree():
 
 
 func _on_player_died():
+	overworldMusic.stop()	
 	# Mario muerte
 	if Global.alive2 == true:
 		Global.alive2 = false
@@ -84,7 +94,7 @@ func gestionarMuerte():
 			position.y -= 3
 		elif (cambio == true && paused == true):
 			position.y += 3
-
+	
 func _physics_process(delta):
 	if position.y >= 750 && Global.tuberia == false:
 		Global.alive2 == false
@@ -94,24 +104,25 @@ func _physics_process(delta):
 		velocity = Vector2.ZERO  # Detiene el movimiento completamente
 		return
 		
-	if Global.alive2 == true:
-		#Activar
-		$Mario/CollisionShape2D_UP.set_disabled(false)
-		$CollisionShape2D_UP.set_disabled(false)
-		$AnimatedSprite2D_UP.visible = true
-		
-		#Desactivar
-		$Mario/CollisionShape2D.set_disabled(true)
-		$CollisionShape2D.set_disabled(true)
-		$AnimatedSprite2D.visible = false
+	if Global.alive2:
+		_toggle_mushroom_state(true)  # Activar estado del hongo
+	else:
+		_toggle_mushroom_state(false)  # Desactivar estado del hongo
 	
 	#Señal recibida del script de enemy.gd
 	for enemy in get_tree().get_nodes_in_group("enemy"):
+		# Verifica si la señal está conectada antes de intentar desconectarla
+		if enemy.is_connected("player_down", Callable(self, "_on_player_degree")):
+			enemy.disconnect("player_down", Callable(self, "_on_player_degree"))
+		
+		if enemy.is_connected("player_died", Callable(self, "_on_player_died")):
+			enemy.disconnect("player_died", Callable(self, "_on_player_died"))
+		
 		if Global.alive2 == true:
 			enemy.connect("player_down", Callable(self, "_on_player_degree"))
 		elif Global.alive2 == false:
 			enemy.connect("player_died", Callable(self, "_on_player_died"))
-		
+
 	# Gravedad
 	if not is_on_floor():
 		velocity.y += GRAVITY * delta
@@ -126,6 +137,7 @@ func _physics_process(delta):
 
 	# Salto
 	if is_on_floor() and Input.is_action_just_pressed("ui_up"):
+		jumpSound.play(0.0)
 		velocity.y = JUMP_FORCE
 
 	# Límite de velocidad de caída
@@ -138,6 +150,7 @@ func _physics_process(delta):
 		print(position.x)
 		print(position.y)
 		if (Input.is_action_pressed("ui_up") and JUMPED_DUCK == false):
+			jumpSound.play(0.0)
 			velocity.y = JUMP_DUCK
 			if (input_direction > 0):
 				if Global.alive2 == true:
@@ -195,12 +208,18 @@ func _physics_process(delta):
 	if (position.x > 2434 && position.x < 2461 && (Input.is_action_pressed("ui_down") and Global.alive == true) && position.y <= 647 && position.y > 644 ):
 		#get_tree().change_scene_to_file("res://Niveles/lvl__1_1b.tscn")
 		#get_tree().change_scene_to_packed(subnivel)
+		pipeDamageSound.play(0.0)
+		overworldMusic.stop()
+		undergroundMusic.play(0.0)
 		Global.tuberia = true
 		position.x = 2450
 		position.y = 910
 		
 	#if (position.x > 2981 && position.x < 2484 && (Input.is_action_pressed("ui_right") and Global.alive == true) && position.y < 942 && position.y > 938 && Global.tuberia == true):
 	if (position.x > 2983 && Global.tuberia == true && Global.alive == true && Input.is_action_pressed("ui_right") && position.y > 938 && position.y < 940):
+		pipeDamageSound.play(0.0)
+		undergroundMusic.stop()
+		overworldMusic.play(0.0)
 		Global.tuberia = false
 		#get_tree().change_scene_to_packed(nivelAlpha)
 		position.x = 2615
@@ -267,3 +286,33 @@ func load_game_over_scene():
 		animation_player.play("GameOver")
 	else:
 		print("Error: AnimationPlayer no encontrado en game_over.tscn")
+
+var isMushroomSoundPlaying = false  # Variable para verificar si el audio está en reproducción
+
+func _toggle_mushroom_state(enable: bool):
+	if enable and not isMushroomSoundPlaying:
+		isMushroomSoundPlaying = true  # Marcar que el sonido está en reproducción
+
+		# Conectar la señal solo si no está conectada
+		if not mushroomSound.is_connected("finished", Callable(self, "_on_mushroom_sound_finished")):
+			mushroomSound.connect("finished", Callable(self, "_on_mushroom_sound_finished"))  # Conectar la señal
+		
+		mushroomSound.stop()
+		mushroomSound.play(0.0)  # Reproducir solo la primera vez
+		
+		# Activar
+		$Mario/CollisionShape2D_UP.set_disabled(false)
+		$CollisionShape2D_UP.set_disabled(false)
+		$AnimatedSprite2D_UP.visible = true
+		
+		# Desactivar
+		$Mario/CollisionShape2D.set_disabled(true)
+		$CollisionShape2D.set_disabled(true)
+		$AnimatedSprite2D.visible = false
+	elif not enable:
+		mushroomSound.stop()
+		isMushroomSoundPlaying = false  # Restablecer la variable cuando el sonido se detiene
+
+func _on_mushroom_sound_finished():
+	mushroomSound.stop()
+	mushroomSound.disconnect("finished", Callable(self, "_on_mushroom_sound_finished"))

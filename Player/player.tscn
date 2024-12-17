@@ -1,9 +1,14 @@
-[gd_scene load_steps=30 format=3 uid="uid://cuonlfduijsbo"]
+[gd_scene load_steps=35 format=3 uid="uid://cuonlfduijsbo"]
 
 [ext_resource type="Texture2D" uid="uid://brlrwo02orld3" path="res://Assets/Mario Animacion.png" id="1_7n7hb"]
 [ext_resource type="Script" path="res://Player/player.gd" id="1_wqxug"]
 [ext_resource type="Texture2D" uid="uid://grduarhke2te" path="res://Assets/Mario AnimacionLadoOpuesto.png" id="2_lyvn8"]
 [ext_resource type="Texture2D" uid="uid://c5l2mau07q1u7" path="res://Assets/mario.png" id="2_mxvoc"]
+[ext_resource type="AudioStream" uid="uid://5wxjmpu6mfst" path="res://Niveles/Overworld.wav" id="5_t4rdd"]
+[ext_resource type="AudioStream" uid="uid://b1k1epe5pk7fm" path="res://Niveles/Underground.wav" id="6_r6cit"]
+[ext_resource type="AudioStream" uid="uid://blwogtqh0prrm" path="res://Niveles/Jump.wav" id="7_116lx"]
+[ext_resource type="AudioStream" uid="uid://co2b5mqk5eyk5" path="res://Niveles/pipeDamage.mp3" id="8_0r3qr"]
+[ext_resource type="AudioStream" uid="uid://cr1u2kt4mms3v" path="res://Niveles/powerup.wav" id="8_v8acy"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_1dd2b"]
 atlas = ExtResource("1_7n7hb")
@@ -304,5 +309,21 @@ autostart = true
 
 [node name="GladTime" type="Timer" parent="."]
 wait_time = 4.0
+
+[node name="OverWorld" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("5_t4rdd")
+
+[node name="Underground" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("6_r6cit")
+
+[node name="Jump" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("7_116lx")
+
+[node name="PipeDamage" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("8_0r3qr")
+
+[node name="Champi" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("8_v8acy")
+volume_db = 5.0
 
 [connection signal="area_entered" from="Mario" to="." method="_on_mario_area_entered"]

@@ -3,7 +3,7 @@
 [ext_resource type="Texture2D" uid="uid://b8ia4ny15hns7" path="res://Assets/bg2.png" id="1_xjsvt"]
 [ext_resource type="TileSet" uid="uid://bwhtlgm7x7ehu" path="res://Assets/Lvl1.tres" id="2_vlp8o"]
 [ext_resource type="PackedScene" uid="uid://c78pvqnr20n4j" path="res://Enemigos/Gomba.tscn" id="3_ifxbu"]
-[ext_resource type="PackedScene" path="res://Recompensas/DragonCoin.tscn" id="4_1851l"]
+[ext_resource type="PackedScene" uid="uid://daioum7catqmr" path="res://Recompensas/DragonCoin.tscn" id="4_1851l"]
 [ext_resource type="PackedScene" uid="uid://bjgcs6wl6wlmd" path="res://Enemigos/Koopa.tscn" id="4_q5qto"]
 [ext_resource type="PackedScene" uid="uid://dsaolxwt3a47n" path="res://Enemigos/Ankylosaurus.tscn" id="5_kd7fc"]
 [ext_resource type="PackedScene" uid="uid://di3ku2bbe1vyi" path="res://Enemigos/rocket.tscn" id="6_e7sbe"]
@@ -201,5 +201,4 @@ position = Vector2(4198, 642)
 position = Vector2(390, 543)
 
 [node name="Ankylosaurus2" parent="Enemigos" instance=ExtResource("5_kd7fc")]
-visible = false
 position = Vector2(3910, 656)

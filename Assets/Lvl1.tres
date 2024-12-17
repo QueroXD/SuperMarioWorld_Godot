@@ -1,7 +1,7 @@
 [gd_resource type="TileSet" load_steps=5 format=3 uid="uid://bwhtlgm7x7ehu"]
 
 [ext_resource type="Texture2D" uid="uid://cq4n0054otd3v" path="res://Assets/tiles.png" id="1_e85bd"]
-[ext_resource type="Texture2D" uid="uid://bgd67eesg6yac" path="res://Assets/SNES - Super Mario World - Underground Underwater Tileset.png" id="2_t4wrg"]
+[ext_resource type="Texture2D" uid="uid://b0qvw6ngl3nhs" path="res://Assets/SNES - Super Mario World - Underground Underwater Tileset.png" id="2_t4wrg"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_y7ltr"]
 texture = ExtResource("1_e85bd")

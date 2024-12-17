@@ -1,7 +1,7 @@
 [gd_scene load_steps=5 format=3 uid="uid://cc370e54ewrxw"]
 
 [ext_resource type="Script" path="res://Recompensas/champi.gd" id="1_uvrfd"]
-[ext_resource type="Texture2D" uid="uid://bd5ssxps2qsbo" path="res://Assets/champi.png" id="2_alnh5"]
+[ext_resource type="Texture2D" uid="uid://w2jsiql186ob" path="res://Assets/champi.png" id="2_alnh5"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_m4343"]
 size = Vector2(14, 14)

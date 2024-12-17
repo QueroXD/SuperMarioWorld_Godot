@@ -1,8 +1,8 @@
 [gd_scene load_steps=5 format=4 uid="uid://cct22cbxiu458"]
 
-[ext_resource type="Texture2D" uid="uid://d1gbe0wppfqpc" path="res://Assets/lvl1b_background.png" id="1_ey40a"]
+[ext_resource type="Texture2D" uid="uid://4m8hfqyf48ot" path="res://Assets/lvl1b_background.png" id="1_ey40a"]
 [ext_resource type="TileSet" uid="uid://bwhtlgm7x7ehu" path="res://Assets/Lvl1.tres" id="1_nddnh"]
-[ext_resource type="PackedScene" path="res://Recompensas/DragonCoin.tscn" id="2_1w532"]
+[ext_resource type="PackedScene" uid="uid://daioum7catqmr" path="res://Recompensas/DragonCoin.tscn" id="2_1w532"]
 [ext_resource type="PackedScene" uid="uid://japy27d606u4" path="res://Recompensas/coin.tscn" id="2_8vv2a"]
 
 [node name="lvl _1-1b" type="Node2D"]
