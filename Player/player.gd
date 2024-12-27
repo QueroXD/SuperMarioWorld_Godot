@@ -34,7 +34,6 @@ var input_direction = 0
 var JUMPED_DUCK = false
 var cambio = false
 var paused = false
-var CoinContador = 0
 var CambioScena = false
 
 
@@ -52,10 +51,17 @@ func _ready():
 #	Señal recibida del script coin.gd
 	for coin in get_tree().get_nodes_in_group("coin"):
 		coin.connect("coin_obteined", Callable(self, "_on_coin_obteined"))
+	
+	for dragonCoin in get_tree().get_nodes_in_group("dragonCoin"):
+		dragonCoin.connect("dragonCoin_obteined", Callable(self, "_on_dragonCoin_obteined"))
 
 func _on_coin_obteined():
-	CoinContador = CoinContador + 1
-	print(CoinContador)
+	Global.coins += 1
+
+func _on_dragonCoin_obteined():
+	Global.dragonCoins += 1
+	Global.coins += 1
+	Global.points += 1000
 
 func _on_player_degree():
 	pipeDamageSound.play(0.0)	

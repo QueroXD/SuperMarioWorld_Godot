@@ -1,6 +1,7 @@
-[gd_scene load_steps=10 format=3 uid="uid://75ufrji4qy4v"]
+[gd_scene load_steps=11 format=3 uid="uid://75ufrji4qy4v"]
 
 [ext_resource type="Texture2D" uid="uid://cubv6intjsvt7" path="res://Assets/coins.png" id="1_0mdh0"]
+[ext_resource type="Script" path="res://Player/hud.gd" id="1_vq303"]
 [ext_resource type="FontFile" uid="uid://dumh8udfscuum" path="res://Assets/Super-Mario-World.ttf" id="2_uyr7y"]
 [ext_resource type="Texture2D" uid="uid://bo0k7q67sl36e" path="res://Assets/cross.png" id="3_7cwyt"]
 [ext_resource type="Texture2D" uid="uid://r3yr1gc4kln2" path="res://Assets/star.png" id="4_hnvuw"]
@@ -35,6 +36,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+script = ExtResource("1_vq303")
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
@@ -155,3 +157,15 @@ offset_top = 25.0
 offset_right = 348.0
 offset_bottom = 49.0
 texture = ExtResource("6_er2hi")
+
+[node name="monedaEstrella4" type="TextureRect" parent="CanvasLayer"]
+offset_left = 348.0
+offset_top = 25.0
+offset_right = 372.0
+offset_bottom = 49.0
+texture = ExtResource("6_er2hi")
+
+[node name="CountdownTimer" type="Timer" parent="CanvasLayer"]
+autostart = true
+
+[connection signal="timeout" from="CanvasLayer/CountdownTimer" to="." method="_on_timer_timeout"]
