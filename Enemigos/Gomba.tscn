@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" path="res://Enemigos/enemy.gd" id="1_im6ov"]
 [ext_resource type="Texture2D" uid="uid://dgs80ep4qlsvt" path="res://Assets/smw_enemies_sheet.png" id="2_esial"]
-[ext_resource type="Texture2D" uid="uid://w04wqrb56ibd" path="res://Assets/smw_enemies_sheet_CAMBIO.png" id="3_dncjt"]
+[ext_resource type="Texture2D" uid="uid://cxyi5q4myuct7" path="res://Assets/smw_enemies_sheet_CAMBIO.png" id="3_dncjt"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_eh7cg"]
 atlas = ExtResource("2_esial")

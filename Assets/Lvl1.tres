@@ -1,7 +1,7 @@
 [gd_resource type="TileSet" load_steps=5 format=3 uid="uid://bwhtlgm7x7ehu"]
 
 [ext_resource type="Texture2D" uid="uid://cq4n0054otd3v" path="res://Assets/tiles.png" id="1_e85bd"]
-[ext_resource type="Texture2D" uid="uid://bgd67eesg6yac" path="res://Assets/SNES - Super Mario World - Underground Underwater Tileset.png" id="2_t4wrg"]
+[ext_resource type="Texture2D" uid="uid://bk71wxwys7t5c" path="res://Assets/SNES - Super Mario World - Underground Underwater Tileset.png" id="2_t4wrg"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_y7ltr"]
 texture = ExtResource("1_e85bd")
@@ -70,6 +70,7 @@ separation = Vector2i(1, 1)
 2:3/0 = 0
 3:3/0 = 0
 4:3/0 = 0
+4:3/0/physics_layer_0/polygon_0/points = PackedVector2Array(-7.0625, -7.125, 6.875, -6.9375, 6.9375, -0.0625, 5.125, -0.0625, 4.8125, 1, -5.875, 0.9375, -6.25, -0.125, -6.875, -0.125)
 5:3/0 = 0
 5:3/0/physics_layer_0/polygon_0/points = PackedVector2Array(-6.75, -7, 8, -7, 8, 5.875, -4.875, 5.625, -5.875, 4.75, -7, 4.75)
 6:3/0 = 0
@@ -94,6 +95,7 @@ separation = Vector2i(1, 1)
 2:4/0 = 0
 3:4/0 = 0
 4:4/0 = 0
+4:4/0/physics_layer_0/polygon_0/points = PackedVector2Array(6.125, -8, 6, 8, -6.375, 8, -6, -8)
 5:4/0 = 0
 5:4/0/physics_layer_0/polygon_0/points = PackedVector2Array(-6, -8, -6.25, 8, 8, 8, 8, -8)
 6:4/0 = 0
@@ -117,6 +119,8 @@ separation = Vector2i(1, 1)
 2:5/0 = 0
 3:5/0 = 0
 4:5/0 = 0
+4:5/0/physics_layer_0/polygon_0/points = PackedVector2Array(-6, -8, -6, -2, 6.0625, -2.0625, 6, -8)
+4:5/0/physics_layer_0/polygon_1/points = PackedVector2Array(-5.9375, -1, -6.0625, -0.0625, -7, -0.0625, -7.0625, 6.9375, 6.9375, 6.8125, 6.9375, 0.1875, 5.0625, -0.125, 4.75, -1)
 5:5/0 = 0
 5:5/0/physics_layer_0/polygon_0/points = PackedVector2Array(-7, -5.125, -7, 7, 8, 6.75, 8, -5.875, -5, -6.25, -5, -4.75)
 6:5/0 = 0
@@ -135,6 +139,7 @@ separation = Vector2i(1, 1)
 18:5/0 = 0
 19:5/0 = 0
 0:6/0 = 0
+0:6/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -4.75, -8, -1.25, -5, -2, -0.875, -2.375, 2.25, -3.375, 4.75, -2.875, 8, -3.625, 8, -6.875, -3.5, -6.75, -4.875, -6, -6.625, -4.375)
 1:6/0 = 0
 1:6/0/physics_layer_0/polygon_0/points = PackedVector2Array(8, -8, -3.75, -8, -4.5, -6.75, -6.125, -6.5, -6.75, -5.5, -6.875, -4.25, -8, -4, -8, 8, 8, 8)
 2:6/0 = 0
@@ -142,6 +147,7 @@ separation = Vector2i(1, 1)
 3:6/0 = 0
 3:6/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 3.625, -8, 3.875, -6.75, 5.875, -6.875, 6.125, -5.625, 6.625, -5.375, 7, -3.625, 8, -3.625, 8, 8, -8, 8)
 4:6/0 = 0
+4:6/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -7, -8, -4.5, -6.625, -3.625, -4.875, -2.625, -2.25, -3.125, -0.25, -3.75, 2.375, -3.75, 4.25, -3.75, 5.875, -2.875, 6.5, -2.125, 6.375, -5, 4.5, -6.125, 3.625, -6.25, 2.125, -6.75)
 5:6/0 = 0
 5:6/0/physics_layer_0/polygon_0/points = PackedVector2Array(-6.75, -6.875, 6.875, -7, 6.875, 7, -6.75, 7)
 6:6/0 = 0

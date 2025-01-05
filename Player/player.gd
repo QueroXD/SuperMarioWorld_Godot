@@ -70,7 +70,6 @@ func _on_player_degree():
 	GladTime.start()
 	GladTime.connect("timeout", Callable(self, "gestionarMuerte"))  # Conecta la señal del temporizador
 
-
 func _on_player_died():
 	overworldMusic.stop()	
 	# Mario muerte
@@ -102,9 +101,10 @@ func gestionarMuerte():
 			position.y += 3
 	
 func _physics_process(delta):
-	if position.y >= 750 && Global.tuberia == false:
-		Global.alive2 == false
+	if position.y >= 750 and not Global.tuberia:
+		Global.alive2 = false  # Usa '=' en lugar de '=='
 		_on_player_died()
+
 	if not Global.alive:
 		# Detener el movimiento y la gravedad
 		velocity = Vector2.ZERO  # Detiene el movimiento completamente
@@ -228,8 +228,11 @@ func _physics_process(delta):
 		position.y = 600
 		
 	if (position.x > 6239 && Global.alive == true):
-		#Animacion de ganar 
+		TimerPause.start()
+		TimerPause.wait_time = 2
 		print("Winner")
+		Global.winner = true
+		load_winner_scene()
 		
 	# Movimiento
 	move_and_slide()
@@ -250,11 +253,12 @@ func gestorIdle():
 	TimerSprite.start()
 
 func _activate_duck_collision():
-	if Global.alive2 == true:
+	if Global.alive2:
 		# Desactivar las colisiones de pie
 		$Mario/CollisionShape2D_UP.set_disabled(true)
 	else:
 		$Mario/CollisionShape2D.set_disabled(true)
+
 	# Activar las colisiones de agachado
 	$Mario/CollisionShape2D_duck.set_disabled(false)
 
@@ -279,17 +283,44 @@ func pause():
 		TimerPause.stop()
 
 func load_game_over_scene():
+	overworldMusic.stop()  # Detener la música del mundo exterior cuando se gana.
+
+	# Pausar el árbol globalmente
+	get_tree().paused = true
+
+	# Instanciar la escena de ganador
 	var scene_resource = load("res://Player/game_over.tscn")
+	var game_over = scene_resource.instantiate()
+	get_tree().root.add_child(game_over)  # Agregar la escena al árbol de nodos.
 
-	var game_over_scene = scene_resource.instantiate()
-	get_tree().root.add_child(game_over_scene)
+	# Despausar solo la escena winner, estableciendo su Process Mode en "Always"
+	game_over.set_process_mode(Node.PROCESS_MODE_ALWAYS)
+	game_over.set_physics_process(true)  # Si es necesario, habilitar también la física.
 
-	# Asegúrate de iniciar la animación y de que los TextureRect estén visibles
-	var animation_player = game_over_scene.get_node("AnimationPlayer")
-	if animation_player:
-		animation_player.play("GameOver")
-	else:
-		print("Error: AnimationPlayer no encontrado en game_over.tscn")
+	# Asegúrate de que si hay un nodo de audio, no esté detenido
+	var audio_player = game_over.get_node_or_null("AudioStreamPlayer")
+	if audio_player:
+		audio_player.play()  # Reproducir el audio asociado a la escena de ganador	
+
+func load_winner_scene():
+	overworldMusic.stop()  # Detener la música del mundo exterior cuando se gana.
+
+	# Pausar el árbol globalmente
+	get_tree().paused = true
+
+	# Instanciar la escena de ganador
+	var scene_resource = load("res://Player/winner.tscn")
+	var winner_scene = scene_resource.instantiate()
+	get_tree().root.add_child(winner_scene)  # Agregar la escena al árbol de nodos.
+
+	# Despausar solo la escena winner, estableciendo su Process Mode en "Always"
+	winner_scene.set_process_mode(Node.PROCESS_MODE_ALWAYS)
+	winner_scene.set_physics_process(true)  # Si es necesario, habilitar también la física.
+
+	# Asegúrate de que si hay un nodo de audio, no esté detenido
+	var audio_player = winner_scene.get_node_or_null("AudioStreamPlayer")
+	if audio_player:
+		audio_player.play()  # Reproducir el audio asociado a la escena de ganador	
 
 var isMushroomSoundPlaying = false  # Variable para verificar si el audio está en reproducción
 

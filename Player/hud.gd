@@ -9,23 +9,24 @@ var timer_value: int = 300
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	timeUI.text = str(timer_value)
-	timer.connect("timeout",Callable(self, "_on_timer_timeout"))
-	timer.start()
-	
-	$CanvasLayer/monedaEstrella1.hide()
-	$CanvasLayer/monedaEstrella2.hide()
-	$CanvasLayer/monedaEstrella3.hide()
-	$CanvasLayer/monedaEstrella4.hide()
+	timeUI.text = str(Global.timeValue)
+	if !Global.winner:
+		timer.connect("timeout",Callable(self, "_on_timer_timeout"))
+		timer.start()
+		$CanvasLayer/monedaEstrella1.hide()
+		$CanvasLayer/monedaEstrella2.hide()
+		$CanvasLayer/monedaEstrella3.hide()
+		$CanvasLayer/monedaEstrella4.hide()
 
 func _on_timer_timeout():
-	timer_value -= 1
-	
-	timeUI.text = str(timer_value)
+	if !Global.winner:
+		Global.timeValue -= 1
+		
+	timeUI.text = str(Global.timeValue)
 	coins.text = str(Global.coins)
 	points.text = str(Global.points).pad_zeros(4)
-	
-	if timer_value <= 0:
+		
+	if Global.timeValue <= 0:
 		timer.stop()
 	
 	if Global.dragonCoins == 1:

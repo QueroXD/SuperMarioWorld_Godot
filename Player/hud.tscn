@@ -2,11 +2,11 @@
 
 [ext_resource type="Texture2D" uid="uid://cubv6intjsvt7" path="res://Assets/coins.png" id="1_0mdh0"]
 [ext_resource type="Script" path="res://Player/hud.gd" id="1_vq303"]
-[ext_resource type="FontFile" uid="uid://dumh8udfscuum" path="res://Assets/Super-Mario-World.ttf" id="2_uyr7y"]
-[ext_resource type="Texture2D" uid="uid://bo0k7q67sl36e" path="res://Assets/cross.png" id="3_7cwyt"]
-[ext_resource type="Texture2D" uid="uid://r3yr1gc4kln2" path="res://Assets/star.png" id="4_hnvuw"]
-[ext_resource type="Texture2D" uid="uid://cjwbd2f8ebymx" path="res://Assets/marco.png" id="4_ot2q8"]
-[ext_resource type="Texture2D" uid="uid://bpdabvqi3yjeg" path="res://Assets/coin.png" id="6_er2hi"]
+[ext_resource type="FontFile" uid="uid://iue6pgsxh4ki" path="res://Assets/Super-Mario-World.ttf" id="2_uyr7y"]
+[ext_resource type="Texture2D" uid="uid://d1aarj6dul4ew" path="res://Assets/cross.png" id="3_7cwyt"]
+[ext_resource type="Texture2D" uid="uid://cumsif5udor7b" path="res://Assets/star.png" id="4_hnvuw"]
+[ext_resource type="Texture2D" uid="uid://djj1ohoj4mmor" path="res://Assets/marco.png" id="4_ot2q8"]
+[ext_resource type="Texture2D" uid="uid://cocnkuaxjikou" path="res://Assets/coin.png" id="6_er2hi"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_0erkd"]
 line_spacing = 4.0
