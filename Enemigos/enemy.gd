@@ -122,9 +122,9 @@ func _on_interaction_points_area_entered(area: Area2D) -> void:
 						direction = Vector2.LEFT
 					speed = 75.00
 				elif standit == true && move == true:
-					#if direction == Vector2.RIGHT && 
-					#died()
-					print("Jugador muerto")
+					died()
+				else:
+					died()
 		elif name.contains("Gomba"):  # Basado en el nombre del nodo
 			# Comprueba si el jugador está cayendo desde arriba
 			if player_position.y > 659 && player_position.y < 665:

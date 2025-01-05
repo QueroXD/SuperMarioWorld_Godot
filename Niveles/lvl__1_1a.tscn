@@ -213,13 +213,13 @@ position = Vector2(1071, 656)
 position = Vector2(1704, 655)
 
 [node name="Ankylosaurus5" parent="Enemigos" instance=ExtResource("5_kd7fc")]
-position = Vector2(2198, 654)
+position = Vector2(2198, 656)
 
 [node name="Ankylosaurus6" parent="Enemigos" instance=ExtResource("5_kd7fc")]
-position = Vector2(2721, 655)
+position = Vector2(2721, 656)
 
 [node name="Ankylosaurus7" parent="Enemigos" instance=ExtResource("5_kd7fc")]
-position = Vector2(3475, 655)
+position = Vector2(3475, 656)
 
 [node name="Ankylosaurus8" parent="Enemigos" instance=ExtResource("5_kd7fc")]
 position = Vector2(3708, 656)
@@ -240,10 +240,10 @@ position = Vector2(4257, 656)
 position = Vector2(5056, 656)
 
 [node name="Ankylosaurus14" parent="Enemigos" instance=ExtResource("5_kd7fc")]
-position = Vector2(5339, 655)
+position = Vector2(5339, 656)
 
 [node name="Ankylosaurus15" parent="Enemigos" instance=ExtResource("5_kd7fc")]
-position = Vector2(5948, 605)
+position = Vector2(5948, 608)
 
 [node name="Rocket" parent="Enemigos" instance=ExtResource("6_e7sbe")]
 position = Vector2(4198, 642)

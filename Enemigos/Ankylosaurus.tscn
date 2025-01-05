@@ -131,7 +131,7 @@ script = ExtResource("1_sya3v")
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 position = Vector2(0, -1)
 sprite_frames = SubResource("SpriteFrames_gb81n")
-animation = &"enemy_dead_left"
+animation = &"run_left"
 
 [node name="Timer" type="Timer" parent="."]
 

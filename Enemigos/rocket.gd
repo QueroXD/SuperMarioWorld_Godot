@@ -43,9 +43,12 @@ func move_rocket(delta):
 func _on_interaction_points_area_entered(area: Area2D) -> void:
 	# Lógica para colisiones
 	if area.name == "Mario":
-		var player_position = area.global_position	
+		var player_position = area.global_position
+		print(player_position.y)
 		if name.contains("Rocket"):
-			if player_position.y >= 613 && player_position.y <= 615:
+			if player_position.y >= 606 && player_position.y <= 608:
+				rocket_died()
+			elif player_position.y >= 612 && player_position.y <= 618:
 				rocket_died()
 			else:
 				died()

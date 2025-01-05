@@ -1,11 +1,11 @@
 [gd_scene load_steps=11 format=3 uid="uid://japy27d606u4"]
 
 [ext_resource type="Script" path="res://Recompensas/coin.gd" id="1_binfw"]
-[ext_resource type="Texture2D" uid="uid://c61gqqdpfyeeh" path="res://Assets/Coin/coin_1.png" id="2_4pief"]
-[ext_resource type="Texture2D" uid="uid://cofjj51vokd8" path="res://Assets/Coin/coin_2.png" id="3_oglnw"]
-[ext_resource type="Texture2D" uid="uid://bt3qajg5hl8l2" path="res://Assets/Coin/coin_3.png" id="4_sqjjg"]
-[ext_resource type="Texture2D" uid="uid://defiolfm03se7" path="res://Assets/Coin/coin_4.png" id="5_rx7ds"]
-[ext_resource type="Texture2D" uid="uid://dax4bvuwqqs5i" path="res://Assets/Coin/coin_5.png" id="6_daj6t"]
+[ext_resource type="Texture2D" uid="uid://blbak8510fab5" path="res://Assets/Coin/coin_1.png" id="2_4pief"]
+[ext_resource type="Texture2D" uid="uid://cwj52i3qxyxs1" path="res://Assets/Coin/coin_2.png" id="3_oglnw"]
+[ext_resource type="Texture2D" uid="uid://dy5cmk4arrm3p" path="res://Assets/Coin/coin_3.png" id="4_sqjjg"]
+[ext_resource type="Texture2D" uid="uid://d3a21x4vy53sc" path="res://Assets/Coin/coin_4.png" id="5_rx7ds"]
+[ext_resource type="Texture2D" uid="uid://bfiio1kv2k65m" path="res://Assets/Coin/coin_5.png" id="6_daj6t"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_sr4qg"]
 atlas = ExtResource("2_4pief")

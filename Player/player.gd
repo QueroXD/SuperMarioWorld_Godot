@@ -212,8 +212,6 @@ func _physics_process(delta):
 		_activate_standing_collision()  # Activar colisiones de pie
 		
 	if (position.x > 2434 && position.x < 2461 && (Input.is_action_pressed("ui_down") and Global.alive == true) && position.y <= 647 && position.y > 644 ):
-		#get_tree().change_scene_to_file("res://Niveles/lvl__1_1b.tscn")
-		#get_tree().change_scene_to_packed(subnivel)
 		pipeDamageSound.play(0.0)
 		overworldMusic.stop()
 		undergroundMusic.play(0.0)
@@ -221,17 +219,17 @@ func _physics_process(delta):
 		position.x = 2450
 		position.y = 910
 		
-	#if (position.x > 2981 && position.x < 2484 && (Input.is_action_pressed("ui_right") and Global.alive == true) && position.y < 942 && position.y > 938 && Global.tuberia == true):
-	if (position.x > 2983 && Global.tuberia == true && Global.alive == true && Input.is_action_pressed("ui_right") && position.y > 938 && position.y < 940):
+	if (position.x > 2981 && Global.tuberia == true && Global.alive == true && Input.is_action_pressed("ui_right") && position.y > 938 && position.y < 940):
 		pipeDamageSound.play(0.0)
 		undergroundMusic.stop()
 		overworldMusic.play(0.0)
 		Global.tuberia = false
-		#get_tree().change_scene_to_packed(nivelAlpha)
 		position.x = 2615
 		position.y = 600
-		#Respawn al eje x = 2615
-		#Respawn al eje y = 600
+		
+	if (position.x > 6239 && Global.alive == true):
+		#Animacion de ganar 
+		print("Winner")
 		
 	# Movimiento
 	move_and_slide()
